@@ -211,10 +211,50 @@
       class="scanner-overlay"
       id="scannerOverlay"
       aria-hidden="true"
-      data-view="list"
+      data-view="filters"
     >
       <div class="scanner-backdrop" data-close-scanner></div>
       <div class="scanner-shell">
+        <section class="scanner-view filter-view" data-view-panel="filters">
+          <header class="scanner-header">
+            <div>
+              <p class="eyebrow">Dial in your cravings</p>
+              <h3>Toggle the tags you want BiteWise to scan.</h3>
+              <p class="subtext">
+                Everything is on by default—switch off any vibes you’re not
+                feeling before we pull your matches.
+              </p>
+            </div>
+            <button
+              class="icon-btn"
+              type="button"
+              data-close-scanner
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </header>
+          <div class="filter-body">
+            <div
+              class="filter-chip-grid"
+              id="filterChipGrid"
+              role="group"
+              aria-label="Scanner tag filters"
+            ></div>
+            <div class="filter-actions">
+              <button class="pill-link" type="button" data-filter-select-all>
+                Select all
+              </button>
+              <div class="filter-summary">
+                <p id="filterSummary">All cravings active</p>
+                <button class="btn primary" type="button" data-filter-apply>
+                  Show matches
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="scanner-view list-view" data-view-panel="list">
           <header class="scanner-header">
             <div>
@@ -226,14 +266,19 @@
                 right once you're ready to head back here.
               </p>
             </div>
-            <button
-              class="icon-btn"
-              type="button"
-              data-close-scanner
-              aria-label="Close"
-            >
-              ✕
-            </button>
+            <div class="scanner-actions">
+              <button class="pill-link" type="button" data-open-filters>
+                Adjust filters
+              </button>
+              <button
+                class="icon-btn"
+                type="button"
+                data-close-scanner
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
           </header>
           <ul
             class="scanner-list"

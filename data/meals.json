@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Triple Garlic Noodle Bowl",
+    "restaurant": "Wok & Roll",
+    "price": "$10.80",
+    "rating": 4.8,
+    "distance": "0.4 mi",
+    "eta": "22 min",
+    "badges": ["XL portion", "Sesame glaze", "Add tofu"],
+    "tags": ["big_cheap", "flavorful"]
+  },
+  {
+    "name": "Market Veggie Plate",
+    "restaurant": "Harvest Street",
+    "price": "$11.20",
+    "rating": 4.6,
+    "distance": "1.1 mi",
+    "eta": "17 min",
+    "badges": ["3 sides", "Cornbread", "Free delivery"],
+    "tags": ["big_cheap", "vegetarian"]
+  },
+  {
+    "name": "Loaded Pozole",
+    "restaurant": "Casa Cielo",
+    "price": "$9.90",
+    "rating": 4.7,
+    "distance": "0.8 mi",
+    "eta": "24 min",
+    "badges": ["Hominy", "Chicharrón", "Feeds 2"],
+    "tags": ["big_cheap", "spicy"]
+  },
+  {
+    "name": "Bone-in Short Rib",
+    "restaurant": "Ember & Oak",
+    "price": "$23",
+    "rating": 4.9,
+    "distance": "1.4 mi",
+    "eta": "32 min",
+    "badges": ["Slow braised", "Smoky glaze", "26g protein"],
+    "tags": ["meaty", "flavorful"]
+  },
+  {
+    "name": "Harissa Lamb Wrap",
+    "restaurant": "Atlas Mezze",
+    "price": "$15.50",
+    "rating": 4.8,
+    "distance": "0.9 mi",
+    "eta": "18 min",
+    "badges": ["Fire grilled", "Garlic yogurt", "Pickled veg"],
+    "tags": ["meaty", "spicy"]
+  },
+  {
+    "name": "Truffle Steak Frites",
+    "restaurant": "Salle 19",
+    "price": "$27",
+    "rating": 4.7,
+    "distance": "1.7 mi",
+    "eta": "35 min",
+    "badges": ["Prime sirloin", "Sea salt fries", "Fresh chimichurri"],
+    "tags": ["meaty", "flavorful"]
+  },
+  {
+    "name": "Miso Maple Power Bowl",
+    "restaurant": "Sprout Society",
+    "price": "$13.20",
+    "rating": 4.8,
+    "distance": "0.5 mi",
+    "eta": "16 min",
+    "badges": ["Tempeh", "Charred broccolini", "Pickled radish"],
+    "tags": ["vegan", "low_calorie"]
+  },
+  {
+    "name": "Crunchy Sushi Burrito",
+    "restaurant": "Plant Lab",
+    "price": "$12.70",
+    "rating": 4.6,
+    "distance": "0.7 mi",
+    "eta": "19 min",
+    "badges": ["Jackfruit", "Wasabi peas", "Gluten-free"],
+    "tags": ["vegan", "spicy"]
+  },
+  {
+    "name": "Roasted Pepper Lasagna",
+    "restaurant": "Kindred Table",
+    "price": "$14.90",
+    "rating": 4.7,
+    "distance": "1.2 mi",
+    "eta": "28 min",
+    "badges": ["Cashew ricotta", "Fresh basil", "Feeds 2"],
+    "tags": ["vegan", "flavorful"]
+  },
+  {
+    "name": "Wild Mushroom Pappardelle",
+    "restaurant": "Nona's",
+    "price": "$16.50",
+    "rating": 4.9,
+    "distance": "0.6 mi",
+    "eta": "25 min",
+    "badges": ["Handmade pasta", "Truffle oil", "Parmesan crisp"],
+    "tags": ["vegetarian", "flavorful"]
+  },
+  {
+    "name": "Char Paneer Taco Kit",
+    "restaurant": "Masala Cartel",
+    "price": "$15.70",
+    "rating": 4.7,
+    "distance": "1.3 mi",
+    "eta": "27 min",
+    "badges": ["Griddle paneer", "Ajwain slaw", "5 tacos"],
+    "tags": ["vegetarian", "spicy"]
+  },
+  {
+    "name": "Burrata Citrus Salad",
+    "restaurant": "Clementine",
+    "price": "$13.40",
+    "rating": 4.6,
+    "distance": "0.9 mi",
+    "eta": "18 min",
+    "badges": ["Blood orange", "Pistachio crumble", "Honey vinaigrette"],
+    "tags": ["vegetarian", "low_calorie"]
+  },
+  {
+    "name": "Zesty Ginger Snap Bowl",
+    "restaurant": "Keen Kitchen",
+    "price": "$12",
+    "rating": 4.7,
+    "distance": "0.3 mi",
+    "eta": "15 min",
+    "badges": ["410 kcal", "Glass noodles", "Crunchy veggie"],
+    "tags": ["low_calorie", "vegan"]
+  },
+  {
+    "name": "Citrus Herb Salmon",
+    "restaurant": "Dockside",
+    "price": "$18",
+    "rating": 4.8,
+    "distance": "1 mi",
+    "eta": "23 min",
+    "badges": ["480 kcal", "Omega-3", "Charred fennel"],
+    "tags": ["low_calorie", "meaty"]
+  },
+  {
+    "name": "Garden Pho Lite",
+    "restaurant": "Pho Philo",
+    "price": "$11.30",
+    "rating": 4.5,
+    "distance": "0.8 mi",
+    "eta": "20 min",
+    "badges": ["Bone broth swap", "Zucchini noodles", "Fresh herbs"],
+    "tags": ["low_calorie", "flavorful"]
+  },
+  {
+    "name": "Firecracker Gochu Bowl",
+    "restaurant": "Seoul Factory",
+    "price": "$11.90",
+    "rating": 4.8,
+    "distance": "0.6 mi",
+    "eta": "18 min",
+    "badges": ["Level 4 heat", "Crispy tofu", "Quick pickup"],
+    "tags": ["spicy", "vegan"]
+  },
+  {
+    "name": "Aguachile Verde",
+    "restaurant": "Pacífico",
+    "price": "$16.20",
+    "rating": 4.7,
+    "distance": "1.1 mi",
+    "eta": "26 min",
+    "badges": ["Serrano", "Raw shrimp", "Cooling cucumber"],
+    "tags": ["spicy", "low_calorie"]
+  },
+  {
+    "name": "Brimstone Birria Ramen",
+    "restaurant": "Caldera",
+    "price": "$14.80",
+    "rating": 4.9,
+    "distance": "1.4 mi",
+    "eta": "24 min",
+    "badges": ["Molten broth", "Quesabirria dip", "After 5pm"],
+    "tags": ["spicy", "flavorful"]
+  },
+  {
+    "name": "Smoked Umami Cauli Steak",
+    "restaurant": "Torch & Thyme",
+    "price": "$17.30",
+    "rating": 4.8,
+    "distance": "1 mi",
+    "eta": "30 min",
+    "badges": ["Black garlic", "Crunchy lentils", "Miso gremolata"],
+    "tags": ["flavorful", "vegan"]
+  },
+  {
+    "name": "XO Crispy Rice",
+    "restaurant": "Night Market",
+    "price": "$15.40",
+    "rating": 4.7,
+    "distance": "0.8 mi",
+    "eta": "22 min",
+    "badges": ["Furikake", "Soft egg", "Chile crunch"],
+    "tags": ["flavorful", "spicy"]
+  },
+  {
+    "name": "Umami Bomb Tostada",
+    "restaurant": "Luna Verde",
+    "price": "$13.60",
+    "rating": 4.6,
+    "distance": "0.5 mi",
+    "eta": "19 min",
+    "badges": ["Charred corn", "Mole drizzle", "Avocado mousse"],
+    "tags": ["flavorful", "vegetarian"]
+  },
+  {
+    "name": "Smoked Gouda Smash",
+    "restaurant": "Stacked Co.",
+    "price": "$14.20",
+    "rating": 4.7,
+    "distance": "0.4 mi",
+    "eta": "16 min",
+    "badges": ["Double patty", "Burnt onion jam", "Brioche"],
+    "tags": ["burger", "meaty"]
+  },
+  {
+    "name": "Katsu Patty Melt",
+    "restaurant": "901 Griddle",
+    "price": "$13.80",
+    "rating": 4.8,
+    "distance": "0.9 mi",
+    "eta": "21 min",
+    "badges": ["Panko crunch", "Tangy slaw", "House sauce"],
+    "tags": ["burger", "flavorful"]
+  },
+  {
+    "name": "Green Chile Bison Burger",
+    "restaurant": "Mesita",
+    "price": "$15.60",
+    "rating": 4.9,
+    "distance": "1.2 mi",
+    "eta": "24 min",
+    "badges": ["Roasted chile", "Cotija", "Sweet potato bun"],
+    "tags": ["burger", "spicy"]
+  },
+  {
+    "name": "Blistered Vodka Pie",
+    "restaurant": "Neon Crust",
+    "price": "$18 · 14in",
+    "rating": 4.9,
+    "distance": "0.7 mi",
+    "eta": "26 min",
+    "badges": ["Sourdough base", "Vodka sauce", "Hot honey"],
+    "tags": ["pizza", "flavorful"]
+  },
+  {
+    "name": "Garden Pistou Slice Pack",
+    "restaurant": "Sicilian Signal",
+    "price": "$12 (2 slices)",
+    "rating": 4.6,
+    "distance": "0.5 mi",
+    "eta": "14 min",
+    "badges": ["Thick crust", "Marinated tomato", "Vegan pesto"],
+    "tags": ["pizza", "vegan"]
+  },
+  {
+    "name": "Carbonara Bianca",
+    "restaurant": "Fiamma",
+    "price": "$21 (whole)",
+    "rating": 4.8,
+    "distance": "1.3 mi",
+    "eta": "32 min",
+    "badges": ["Guanciale", "Runny yolk", "Aged pecorino"],
+    "tags": ["pizza", "meaty"]
+  }
+]

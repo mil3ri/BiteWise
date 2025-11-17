@@ -562,6 +562,103 @@ section {
   display: none;
 }
 
+.filter-view {
+  gap: 28px;
+  flex: 1;
+  min-height: 0;
+}
+
+.filter-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  padding-right: 8px;
+  min-height: 0;
+}
+
+.filter-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.filter-chip {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 15, 26, 0.7);
+  padding: 16px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition:
+    border 150ms ease,
+    transform 150ms ease,
+    background 150ms ease;
+}
+
+.filter-chip span {
+  display: block;
+}
+
+.filter-chip .filter-chip-label {
+  font-weight: 600;
+}
+
+.filter-chip .filter-chip-desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.filter-chip.is-active {
+  border-color: rgba(249, 95, 95, 0.7);
+  background: rgba(249, 95, 95, 0.08);
+}
+
+.filter-chip:focus-visible {
+  outline: 2px solid rgba(249, 95, 95, 0.6);
+  outline-offset: 2px;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: sticky;
+  bottom: 0;
+  padding: 12px 0 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 10, 18, 0),
+    rgba(7, 10, 18, 0.85)
+  );
+}
+
+.filter-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-summary p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.scanner-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .scanner-view.list-view {
   overflow-y: auto;
 }
@@ -570,8 +667,13 @@ section {
   overflow: hidden;
 }
 
+.scanner-view.filter-view {
+  overflow: hidden;
+}
+
 .scanner-overlay[data-view="list"] [data-view-panel="list"],
-.scanner-overlay[data-view="feed"] [data-view-panel="feed"] {
+.scanner-overlay[data-view="feed"] [data-view-panel="feed"],
+.scanner-overlay[data-view="filters"] [data-view-panel="filters"] {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -924,6 +1026,15 @@ section {
 
   .scanner-view {
     padding: 24px;
+  }
+
+  .filter-chip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-summary {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .feed-card {

@@ -27,42 +27,41 @@ BiteWise is a smart meal-matching companion. The landing page should communicate
 ## Implementation Notes
 
 - Pure HTML/CSS/JS (no build tooling required).
-- Store craving data + sample menu matches directly in `script.js`.
+- Keep craving definitions inside `script.js`, but load menu data from `data/meals.json`.
 - Animate state changes with CSS transitions and requestAnimationFrame where helpful.
-- Keep assets lightweight so the page can be opened locally by double-clicking `index.html`.
+- Keep assets lightweight so a simple static server (e.g., `python -m http.server`) can serve everything instantly.
 
 ## Built Demo
 
 - **Interactive craving selector** populated from `script.js` data.
 - **Live match feed** that swaps cards based on the active craving.
 - **Hero preview, proof block, and CTA** styled with glassy cards and gradient accents.
-- **Start Scanning overlay** with a tappable list plus a TikTok-style swipe feed (↑/↓ next dish, ← restaurant search, → back to list).
+- **Start Scanning overlay** with a tag-selection step, a tappable list, and a TikTok-style swipe feed (↑/↓ next dish, ← restaurant search, → back to list).
 
 ### File map
 
-| File         | Purpose                                                |
-| ------------ | ------------------------------------------------------ |
-| `index.html` | Page markup and section structure.                     |
-| `styles.css` | Visual system, layout, and responsive rules.           |
-| `script.js`  | Craving definitions, menu data, and DOM interactivity. |
+| File              | Purpose                                               |
+| ----------------- | ----------------------------------------------------- |
+| `index.html`      | Page markup and section structure.                    |
+| `styles.css`      | Visual system, layout, and responsive rules.          |
+| `script.js`       | Craving definitions plus all DOM interactivity.       |
+| `data/meals.json` | Central list of sample dishes with filter-ready tags. |
 
 ## Run the demo
 
 1. `cd` into the project folder.
-2. Open `index.html` in any modern browser (Chrome, Edge, Safari, Firefox).
-3. Tap the craving pills to watch the matches refresh instantly.
-4. Hit **Start scanning** to launch the list view, then swipe or use arrow keys inside the feed to explore meals.
-
-Want a lightweight local server for mobile testing?
+2. Serve the files locally (the feed fetches `data/meals.json`, so direct `file://` loads will be blocked):
 
 ```bash
 python -m http.server 4173
 ```
 
-Then visit `http://localhost:4173` and open `index.html`.
+3. Visit `http://localhost:4173` in Chrome, Edge, Safari, or Firefox.
+4. Tap the craving pills to watch the matches refresh instantly.
+5. Hit **Start scanning**, choose the craving tags you want (all are on by default), tap **Show matches**, then swipe or use arrow keys inside the feed to explore meals.
 
 ## Extend the concept
 
-- Swap the static data in `script.js` with a fetch to your menu intelligence API.
+- Point the `data/meals.json` fetch at your real menu intelligence API.
 - Animate the hero preview so it mirrors the active craving.
 - Pipe the CTA form into a service like Resend, Loops, or Supabase for real signups.

@@ -55,269 +55,20 @@ const cravings = [
   },
 ];
 
-const menuMatches = {
-  big_cheap: [
-    {
-      name: "Triple Garlic Noodle Bowl",
-      restaurant: "Wok & Roll",
-      price: "$10.80",
-      rating: 4.8,
-      distance: "0.4 mi",
-      eta: "22 min",
-      tags: ["XL portion", "Sesame glaze", "Add tofu"],
-    },
-    {
-      name: "Market Veggie Plate",
-      restaurant: "Harvest Street",
-      price: "$11.20",
-      rating: 4.6,
-      distance: "1.1 mi",
-      eta: "17 min",
-      tags: ["3 sides", "Cornbread", "Free delivery"],
-    },
-    {
-      name: "Loaded Pozole",
-      restaurant: "Casa Cielo",
-      price: "$9.90",
-      rating: 4.7,
-      distance: "0.8 mi",
-      eta: "24 min",
-      tags: ["Hominy", "Chicharrón", "Feeds 2"],
-    },
-  ],
-  meaty: [
-    {
-      name: "Bone-in Short Rib",
-      restaurant: "Ember & Oak",
-      price: "$23",
-      rating: 4.9,
-      distance: "1.4 mi",
-      eta: "32 min",
-      tags: ["Slow braised", "Smoky glaze", "26g protein"],
-    },
-    {
-      name: "Harissa Lamb Wrap",
-      restaurant: "Atlas Mezze",
-      price: "$15.50",
-      rating: 4.8,
-      distance: "0.9 mi",
-      eta: "18 min",
-      tags: ["Fire grilled", "Garlic yogurt", "Pickled veg"],
-    },
-    {
-      name: "Truffle Steak Frites",
-      restaurant: "Salle 19",
-      price: "$27",
-      rating: 4.7,
-      distance: "1.7 mi",
-      eta: "35 min",
-      tags: ["Prime sirloin", "Sea salt fries", "Fresh chimichurri"],
-    },
-  ],
-  vegan: [
-    {
-      name: "Miso Maple Power Bowl",
-      restaurant: "Sprout Society",
-      price: "$13.20",
-      rating: 4.8,
-      distance: "0.5 mi",
-      eta: "16 min",
-      tags: ["Tempeh", "Charred broccolini", "Pickled radish"],
-    },
-    {
-      name: "Crunchy Sushi Burrito",
-      restaurant: "Plant Lab",
-      price: "$12.70",
-      rating: 4.6,
-      distance: "0.7 mi",
-      eta: "19 min",
-      tags: ["Jackfruit", "Wasabi peas", "Gluten-free"],
-    },
-    {
-      name: "Roasted Pepper Lasagna",
-      restaurant: "Kindred Table",
-      price: "$14.90",
-      rating: 4.7,
-      distance: "1.2 mi",
-      eta: "28 min",
-      tags: ["Cashew ricotta", "Fresh basil", "Feeds 2"],
-    },
-  ],
-  vegetarian: [
-    {
-      name: "Wild Mushroom Pappardelle",
-      restaurant: "Nona's",
-      price: "$16.50",
-      rating: 4.9,
-      distance: "0.6 mi",
-      eta: "25 min",
-      tags: ["Handmade pasta", "Truffle oil", "Parmesan crisp"],
-    },
-    {
-      name: "Char Paneer Taco Kit",
-      restaurant: "Masala Cartel",
-      price: "$15.70",
-      rating: 4.7,
-      distance: "1.3 mi",
-      eta: "27 min",
-      tags: ["Griddle paneer", "Ajwain slaw", "5 tacos"],
-    },
-    {
-      name: "Burrata Citrus Salad",
-      restaurant: "Clementine",
-      price: "$13.40",
-      rating: 4.6,
-      distance: "0.9 mi",
-      eta: "18 min",
-      tags: ["Blood orange", "Pistachio crumble", "Honey vinaigrette"],
-    },
-  ],
-  low_calorie: [
-    {
-      name: "Zesty Ginger Snap Bowl",
-      restaurant: "Keen Kitchen",
-      price: "$12",
-      rating: 4.7,
-      distance: "0.3 mi",
-      eta: "15 min",
-      tags: ["410 kcal", "Glass noodles", "Crunchy veggie"],
-    },
-    {
-      name: "Citrus Herb Salmon",
-      restaurant: "Dockside",
-      price: "$18",
-      rating: 4.8,
-      distance: "1 mi",
-      eta: "23 min",
-      tags: ["480 kcal", "Omega-3", "Charred fennel"],
-    },
-    {
-      name: "Garden Pho Lite",
-      restaurant: "Pho Philo",
-      price: "$11.30",
-      rating: 4.5,
-      distance: "0.8 mi",
-      eta: "20 min",
-      tags: ["Bone broth swap", "Zucchini noodles", "Fresh herbs"],
-    },
-  ],
-  spicy: [
-    {
-      name: "Firecracker Gochu Bowl",
-      restaurant: "Seoul Factory",
-      price: "$11.90",
-      rating: 4.8,
-      distance: "0.6 mi",
-      eta: "18 min",
-      tags: ["Level 4 heat", "Crispy tofu", "Quick pickup"],
-    },
-    {
-      name: "Aguachile Verde",
-      restaurant: "Pacífico",
-      price: "$16.20",
-      rating: 4.7,
-      distance: "1.1 mi",
-      eta: "26 min",
-      tags: ["Serrano", "Raw shrimp", "Cooling cucumber"],
-    },
-    {
-      name: "Brimstone Birria Ramen",
-      restaurant: "Caldera",
-      price: "$14.80",
-      rating: 4.9,
-      distance: "1.4 mi",
-      eta: "24 min",
-      tags: ["Molten broth", "Quesabirria dip", "After 5pm"],
-    },
-  ],
-  flavorful: [
-    {
-      name: "Smoked Umami Cauli Steak",
-      restaurant: "Torch & Thyme",
-      price: "$17.30",
-      rating: 4.8,
-      distance: "1 mi",
-      eta: "30 min",
-      tags: ["Black garlic", "Crunchy lentils", "Miso gremolata"],
-    },
-    {
-      name: "XO Crispy Rice",
-      restaurant: "Night Market",
-      price: "$15.40",
-      rating: 4.7,
-      distance: "0.8 mi",
-      eta: "22 min",
-      tags: ["Furikake", "Soft egg", "Chile crunch"],
-    },
-    {
-      name: "Umami Bomb Tostada",
-      restaurant: "Luna Verde",
-      price: "$13.60",
-      rating: 4.6,
-      distance: "0.5 mi",
-      eta: "19 min",
-      tags: ["Charred corn", "Mole drizzle", "Avocado mousse"],
-    },
-  ],
-  burger: [
-    {
-      name: "Smoked Gouda Smash",
-      restaurant: "Stacked Co.",
-      price: "$14.20",
-      rating: 4.7,
-      distance: "0.4 mi",
-      eta: "16 min",
-      tags: ["Double patty", "Burnt onion jam", "Brioche"],
-    },
-    {
-      name: "Katsu Patty Melt",
-      restaurant: "901 Griddle",
-      price: "$13.80",
-      rating: 4.8,
-      distance: "0.9 mi",
-      eta: "21 min",
-      tags: ["Panko crunch", "Tangy slaw", "House sauce"],
-    },
-    {
-      name: "Green Chile Bison Burger",
-      restaurant: "Mesita",
-      price: "$15.60",
-      rating: 4.9,
-      distance: "1.2 mi",
-      eta: "24 min",
-      tags: ["Roasted chile", "Cotija", "Sweet potato bun"],
-    },
-  ],
-  pizza: [
-    {
-      name: "Blistered Vodka Pie",
-      restaurant: "Neon Crust",
-      price: "$18 · 14in",
-      rating: 4.9,
-      distance: "0.7 mi",
-      eta: "26 min",
-      tags: ["Sourdough base", "Vodka sauce", "Hot honey"],
-    },
-    {
-      name: "Garden Pistou Slice Pack",
-      restaurant: "Sicilian Signal",
-      price: "$12 (2 slices)",
-      rating: 4.6,
-      distance: "0.5 mi",
-      eta: "14 min",
-      tags: ["Thick crust", "Marinated tomato", "Vegan pesto"],
-    },
-    {
-      name: "Carbonara Bianca",
-      restaurant: "Fiamma",
-      price: "$21 (whole)",
-      rating: 4.8,
-      distance: "1.3 mi",
-      eta: "32 min",
-      tags: ["Guanciale", "Runny yolk", "Aged pecorino"],
-    },
-  ],
-};
+const MEALS_DATA_URL = "data/meals.json";
+
+const cravingsById = cravings.reduce((acc, craving) => {
+  acc[craving.id] = craving;
+  return acc;
+}, {});
+
+const filterChipGrid = document.getElementById("filterChipGrid");
+const filterSummary = document.getElementById("filterSummary");
+const filterApplyButton = document.querySelector("[data-filter-apply]");
+const filterSelectAllButton = document.querySelector(
+  "[data-filter-select-all]",
+);
+const openFilterButtons = document.querySelectorAll("[data-open-filters]");
 
 const preferenceGrid = document.getElementById("preferenceGrid");
 const matchList = document.getElementById("matchList");
@@ -349,7 +100,9 @@ let activeCravingId = cravings[0].id;
 let activeFeedIndex = 0;
 let pointerStart = null;
 let dragIntent = null;
+let allMeals = [];
 let currentFeedMeals = [];
+let selectedTagIds = new Set(cravings.map((craving) => craving.id));
 
 const buildPill = ({ id, label, description, emoji }) => {
   const button = document.createElement("button");
@@ -373,6 +126,7 @@ const buildPill = ({ id, label, description, emoji }) => {
 const buildMealCard = (meal) => {
   const card = document.createElement("article");
   card.className = "meal-card";
+  const badges = meal.badges ?? meal.tags ?? [];
   card.innerHTML = `
       <div class="top-row">
         <div>
@@ -387,11 +141,157 @@ const buildMealCard = (meal) => {
         <span>${meal.eta}</span>
       </div>
       <div class="badges">
-        ${meal.tags.map((tag) => `<span class="badge">${tag}</span>`).join("")}
+        ${badges.map((tag) => `<span class="badge">${tag}</span>`).join("")}
       </div>
     `;
   return card;
 };
+
+const buildFilterChip = ({ id, label, description, emoji }) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "filter-chip";
+  button.dataset.filterTag = id;
+  button.setAttribute("aria-pressed", String(selectedTagIds.has(id)));
+  button.innerHTML = `
+    <span class="filter-chip-label">${emoji} ${label}</span>
+    <span class="filter-chip-desc">${description}</span>
+  `;
+
+  if (selectedTagIds.has(id)) {
+    button.classList.add("is-active");
+  }
+
+  button.addEventListener("click", () => {
+    toggleFilterTag(id);
+  });
+
+  return button;
+};
+
+function renderFilterChips() {
+  if (!filterChipGrid) return;
+  filterChipGrid.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+  cravings.forEach((craving) => {
+    fragment.appendChild(buildFilterChip(craving));
+  });
+  filterChipGrid.appendChild(fragment);
+}
+
+function toggleFilterTag(tagId) {
+  if (!selectedTagIds.has(tagId) && !cravingsById[tagId]) {
+    return;
+  }
+
+  const isActive = selectedTagIds.has(tagId);
+  if (isActive && selectedTagIds.size === 1) {
+    return;
+  }
+
+  if (isActive) {
+    selectedTagIds.delete(tagId);
+  } else {
+    selectedTagIds.add(tagId);
+  }
+
+  updateFilterChipStates();
+  updateFilterSummary();
+}
+
+function updateFilterChipStates() {
+  if (!filterChipGrid) return;
+  filterChipGrid.querySelectorAll(".filter-chip").forEach((chip) => {
+    const tagId = chip.dataset.filterTag;
+    const isActive = selectedTagIds.has(tagId);
+    chip.classList.toggle("is-active", isActive);
+    chip.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function updateFilterSummary() {
+  if (!filterSummary) return;
+  const total = selectedTagIds.size;
+  if (total === cravings.length) {
+    filterSummary.textContent = "All cravings active";
+  } else if (total === 1) {
+    const onlyId = Array.from(selectedTagIds)[0];
+    filterSummary.textContent =
+      cravingsById[onlyId]?.label ?? "1 craving active";
+  } else {
+    filterSummary.textContent = `${total} cravings active`;
+  }
+  updateScannerCravingChip();
+}
+
+function selectAllFilters() {
+  selectedTagIds = new Set(cravings.map((craving) => craving.id));
+  updateFilterChipStates();
+  updateFilterSummary();
+}
+
+function applyFilterSelections() {
+  if (!selectedTagIds.size) {
+    return;
+  }
+  currentFeedMeals = buildFeedMeals(Array.from(selectedTagIds));
+  activeFeedIndex = 0;
+  renderScannerList();
+  updateFeedCard(0);
+  toggleScannerPanels("list");
+}
+
+async function loadMeals() {
+  try {
+    const response = await fetch(MEALS_DATA_URL, { cache: "no-cache" });
+    if (!response.ok) {
+      throw new Error(`Unable to load meals (${response.status})`);
+    }
+    const payload = await response.json();
+    allMeals = Array.isArray(payload) ? payload : (payload?.meals ?? []);
+  } catch (error) {
+    console.error("Failed to load meals", error);
+    allMeals = [];
+  }
+}
+
+function getMealsForCraving(cravingId) {
+  if (!cravingId) {
+    return [...allMeals];
+  }
+  return allMeals.filter(
+    (meal) => Array.isArray(meal.tags) && meal.tags.includes(cravingId),
+  );
+}
+
+function getMealsForTagSet(tagIds = []) {
+  const ids = Array.isArray(tagIds) ? tagIds : [tagIds].filter(Boolean);
+  if (!ids.length) {
+    return [...allMeals];
+  }
+  return allMeals.filter(
+    (meal) =>
+      Array.isArray(meal.tags) && meal.tags.some((tag) => ids.includes(tag)),
+  );
+}
+
+function enrichMealForCraving(meal, preferredIds) {
+  const priorities = Array.isArray(preferredIds)
+    ? preferredIds
+    : preferredIds
+      ? [preferredIds]
+      : [];
+  const candidateId =
+    priorities.find((id) => meal.tags?.includes(id)) ??
+    meal.tags?.find((tag) => cravingsById[tag]);
+  const cravingMeta = candidateId ? cravingsById[candidateId] : null;
+  return {
+    ...meal,
+    cravingId: candidateId ?? cravings[0].id,
+    cravingLabel: cravingMeta?.label ?? "Match",
+    emoji: cravingMeta?.emoji ?? "🍽️",
+  };
+}
 
 function renderPills() {
   const fragment = document.createDocumentFragment();
@@ -403,7 +303,7 @@ function renderPills() {
 
 function renderMatches() {
   matchList.innerHTML = "";
-  const matches = menuMatches[activeCravingId] || [];
+  const matches = getMealsForCraving(activeCravingId);
 
   if (!matches.length) {
     const empty = document.createElement("p");
@@ -442,30 +342,11 @@ function setActiveCraving(id) {
   updateScannerCravingChip();
 }
 
-function buildFeedMeals(filterCravingId) {
-  const lookup = cravings.reduce((acc, craving) => {
-    acc[craving.id] = craving;
-    return acc;
-  }, {});
-
-  const meals = [];
-  const cravingIds = filterCravingId
-    ? [filterCravingId]
-    : Object.keys(menuMatches);
-
-  cravingIds.forEach((cravingId) => {
-    const entries = menuMatches[cravingId];
-    if (!entries) return;
-    entries.forEach((meal) => {
-      meals.push({
-        ...meal,
-        cravingId,
-        cravingLabel: lookup[cravingId]?.label ?? "Match",
-        emoji: lookup[cravingId]?.emoji ?? "🍽️",
-      });
-    });
-  });
-  return meals;
+function buildFeedMeals(preferredTags) {
+  const filtered = Array.isArray(preferredTags)
+    ? getMealsForTagSet(preferredTags)
+    : getMealsForCraving(preferredTags);
+  return filtered.map((meal) => enrichMealForCraving(meal, preferredTags));
 }
 
 function renderScannerList() {
@@ -492,7 +373,7 @@ function renderScannerList() {
         <p class="scanner-row-title">${meal.name}</p>
         <p class="scanner-row-meta">${meal.restaurant} • ${meal.distance} • ${meal.price}</p>
         <div class="scanner-row-tags">
-          ${meal.tags
+          ${(meal.badges ?? meal.tags ?? [])
             .slice(0, 3)
             .map((tag) => `<span class="badge">${tag}</span>`)
             .join("")}
@@ -509,16 +390,16 @@ function renderScannerList() {
 
 function openScanner() {
   if (!scannerOverlay) return;
-  currentFeedMeals = buildFeedMeals(activeCravingId);
+  renderFilterChips();
+  updateFilterSummary();
+  currentFeedMeals = buildFeedMeals(Array.from(selectedTagIds));
   activeFeedIndex = 0;
   renderScannerList();
-  updateScannerCravingChip();
   updateFeedCard(0);
   scannerOverlay.classList.add("is-active");
   scannerOverlay.setAttribute("aria-hidden", "false");
-  scannerOverlay.setAttribute("data-view", "list");
   document.body.classList.add("scanner-open");
-  toggleScannerPanels("list");
+  toggleScannerPanels("filters");
 }
 
 function closeScanner() {
@@ -568,7 +449,8 @@ function updateFeedCard(index) {
   feedRestaurant.textContent = `${meal.restaurant} • ${meal.distance}`;
   feedPrice.textContent = meal.price;
   feedMeta.textContent = `${meal.rating.toFixed(1)}★ · ${meal.eta}`;
-  feedTags.innerHTML = meal.tags.map((tag) => `<span>${tag}</span>`).join("");
+  const badges = meal.badges ?? meal.tags ?? [];
+  feedTags.innerHTML = badges.map((tag) => `<span>${tag}</span>`).join("");
   feedIndexLabel.textContent = `${activeFeedIndex + 1}/${currentFeedMeals.length}`;
   feedCard.dataset.index = String(activeFeedIndex);
   setFeedPreview(1);
@@ -880,6 +762,14 @@ function initScanner() {
     toggleScannerPanels("list");
   });
 
+  filterApplyButton?.addEventListener("click", applyFilterSelections);
+  filterSelectAllButton?.addEventListener("click", selectAllFilters);
+  openFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      toggleScannerPanels("filters");
+    });
+  });
+
   wireFeedGestures();
   document.addEventListener("keydown", handleScannerKeyNav);
 }
@@ -918,16 +808,27 @@ function initYear() {
 
 function updateScannerCravingChip() {
   if (!scannerCravingLabel) return;
-  const craving = cravings.find((item) => item.id === activeCravingId);
-  if (!craving) {
+  const selected = Array.from(selectedTagIds);
+  if (!selected.length || selected.length === cravings.length) {
     scannerCravingLabel.textContent = "All cravings";
     return;
   }
-  scannerCravingLabel.textContent = `${craving.emoji} ${craving.label}`;
+  if (selected.length === 1) {
+    const craving = cravingsById[selected[0]];
+    scannerCravingLabel.textContent = craving
+      ? `${craving.emoji} ${craving.label}`
+      : "1 craving";
+    return;
+  }
+  const [firstId, ...rest] = selected;
+  const first = cravingsById[firstId];
+  const label = first ? `${first.emoji} ${first.label}` : "Multiple cravings";
+  scannerCravingLabel.textContent = `${label} +${rest.length} more`;
 }
 
-function init() {
+async function init() {
   renderPills();
+  await loadMeals();
   setActiveCraving(activeCravingId);
   wireScrollButtons();
   wireCtaForm();
@@ -936,7 +837,9 @@ function init() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
+  });
 } else {
   init();
 }
