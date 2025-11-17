@@ -559,8 +559,15 @@ section {
 
 .scanner-view {
   padding: 32px;
-  overflow-y: auto;
   display: none;
+}
+
+.scanner-view.list-view {
+  overflow-y: auto;
+}
+
+.scanner-view.feed-view {
+  overflow: hidden;
 }
 
 .scanner-overlay[data-view="list"] [data-view-panel="list"],
@@ -691,6 +698,8 @@ section {
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  touch-action: none;
+  will-change: transform, opacity;
 }
 
 .feed-label {
@@ -796,10 +805,24 @@ section {
   .site-header {
     flex-direction: column;
     gap: 12px;
+    padding: 16px;
   }
 
   .site-header nav {
     order: 3;
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 2.85rem);
   }
 
   .hero-cta {

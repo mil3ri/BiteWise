@@ -432,6 +432,7 @@ function setActiveCraving(id) {
   activeCravingId = id;
   updateActiveStates();
   renderMatches();
+  updateScannerCravingChip();
 }
 
 function buildFeedMeals(filterCravingId) {
@@ -608,6 +609,30 @@ function handleGesture(deltaX, deltaY) {
 
 function wireFeedGestures() {
   if (!feedCard) return;
+  const applyTransform = (deltaX = 0, deltaY = 0) => {
+    if (!feedCard) return;
+    const fade = Math.min(Math.abs(deltaY) / 320, 0.45);
+    feedCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    feedCard.style.opacity = `${1 - fade}`;
+  };
+
+  const settleCard = () => {
+    if (!feedCard) return;
+    feedCard.style.transition = "transform 200ms ease, opacity 200ms ease";
+    requestAnimationFrame(() => {
+      applyTransform();
+      feedCard?.addEventListener(
+        "transitionend",
+        () => {
+          if (feedCard) {
+            feedCard.style.transition = "";
+          }
+        },
+        { once: true },
+      );
+    });
+  };
+
   feedCard.addEventListener("pointerdown", (event) => {
     pointerStart = {
       x: event.clientX,
@@ -615,11 +640,19 @@ function wireFeedGestures() {
       pointerId: event.pointerId,
     };
     feedCard.setPointerCapture(event.pointerId);
+    feedCard.style.transition = "";
   });
 
   const resetPointer = () => {
     pointerStart = null;
   };
+
+  feedCard.addEventListener("pointermove", (event) => {
+    if (!pointerStart) return;
+    const deltaX = event.clientX - pointerStart.x;
+    const deltaY = event.clientY - pointerStart.y;
+    applyTransform(deltaX, deltaY);
+  });
 
   feedCard.addEventListener("pointerup", (event) => {
     if (!pointerStart) return;
@@ -627,10 +660,17 @@ function wireFeedGestures() {
     const deltaY = event.clientY - pointerStart.y;
     handleGesture(deltaX, deltaY);
     feedCard.releasePointerCapture(pointerStart.pointerId);
+    settleCard();
     resetPointer();
   });
 
-  feedCard.addEventListener("pointercancel", resetPointer);
+  feedCard.addEventListener("pointercancel", () => {
+    if (pointerStart) {
+      feedCard.releasePointerCapture(pointerStart.pointerId);
+    }
+    settleCard();
+    resetPointer();
+  });
 }
 
 function handleScannerKeyNav(event) {
