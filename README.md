@@ -36,6 +36,7 @@ BiteWise is a smart meal-matching companion. The landing page should communicate
 - **Interactive craving selector** populated from `script.js` data.
 - **Live match feed** that swaps cards based on the active craving.
 - **Hero preview, proof block, and CTA** styled with glassy cards and gradient accents.
+- **Start Scanning overlay** with a tappable list plus a TikTok-style swipe feed (↑/↓ next dish, ← restaurant search, → back to list).
 
 ### File map
 
@@ -50,6 +51,7 @@ BiteWise is a smart meal-matching companion. The landing page should communicate
 1. `cd` into the project folder.
 2. Open `index.html` in any modern browser (Chrome, Edge, Safari, Firefox).
 3. Tap the craving pills to watch the matches refresh instantly.
+4. Hit **Start scanning** to launch the list view, then swipe or use arrow keys inside the feed to explore meals.
 
 Want a lightweight local server for mobile testing?
 

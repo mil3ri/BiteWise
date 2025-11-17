@@ -323,8 +323,26 @@ const preferenceGrid = document.getElementById("preferenceGrid");
 const matchList = document.getElementById("matchList");
 const activeCravingLabel = document.getElementById("activeCraving");
 const yearSlot = document.getElementById("year");
+const startScannerBtn = document.getElementById("startScannerBtn");
+const scannerOverlay = document.getElementById("scannerOverlay");
+const scannerList = document.getElementById("scannerList");
+const feedCard = document.getElementById("feedCard");
+const feedTitle = document.getElementById("feedTitle");
+const feedRestaurant = document.getElementById("feedRestaurant");
+const feedPrice = document.getElementById("feedPrice");
+const feedMeta = document.getElementById("feedMeta");
+const feedTags = document.getElementById("feedTags");
+const feedCraving = document.getElementById("feedCraving");
+const feedIndexLabel = document.getElementById("feedIndex");
+const feedNavButtons = document.querySelectorAll("[data-feed-nav]");
+const backToListBtn = document.querySelector("[data-back-to-list]");
+const closeScannerButtons = document.querySelectorAll("[data-close-scanner]");
+const scannerCravingLabel = document.getElementById("scannerCravingLabel");
 
 let activeCravingId = cravings[0].id;
+let activeFeedIndex = 0;
+let pointerStart = null;
+let currentFeedMeals = [];
 
 const buildPill = ({ id, label, description, emoji }) => {
   const button = document.createElement("button");
@@ -416,6 +434,279 @@ function setActiveCraving(id) {
   renderMatches();
 }
 
+function buildFeedMeals(filterCravingId) {
+  const lookup = cravings.reduce((acc, craving) => {
+    acc[craving.id] = craving;
+    return acc;
+  }, {});
+
+  const meals = [];
+  const cravingIds = filterCravingId
+    ? [filterCravingId]
+    : Object.keys(menuMatches);
+
+  cravingIds.forEach((cravingId) => {
+    const entries = menuMatches[cravingId];
+    if (!entries) return;
+    entries.forEach((meal) => {
+      meals.push({
+        ...meal,
+        cravingId,
+        cravingLabel: lookup[cravingId]?.label ?? "Match",
+        emoji: lookup[cravingId]?.emoji ?? "🍽️",
+      });
+    });
+  });
+  return meals;
+}
+
+function renderScannerList() {
+  if (!scannerList) return;
+  scannerList.innerHTML = "";
+  if (!currentFeedMeals.length) {
+    const emptyRow = document.createElement("li");
+    emptyRow.className = "scanner-empty";
+    emptyRow.textContent =
+      "No dishes match this craving right now. We'll ping you the moment something pops!";
+    scannerList.appendChild(emptyRow);
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  currentFeedMeals.forEach((meal, index) => {
+    const li = document.createElement("li");
+    const button = document.createElement("button");
+    button.className = "scanner-row-btn";
+    button.type = "button";
+    button.dataset.index = index;
+    button.innerHTML = `
+      <span class="scanner-row-emoji">${meal.emoji}</span>
+      <div>
+        <p class="scanner-row-title">${meal.name}</p>
+        <p class="scanner-row-meta">${meal.restaurant} • ${meal.distance} • ${meal.price}</p>
+        <div class="scanner-row-tags">
+          ${meal.tags
+            .slice(0, 3)
+            .map((tag) => `<span class="badge">${tag}</span>`)
+            .join("")}
+        </div>
+      </div>
+      <span class="scanner-row-chevron">›</span>
+    `;
+    li.appendChild(button);
+    fragment.appendChild(li);
+  });
+
+  scannerList.appendChild(fragment);
+}
+
+function openScanner() {
+  if (!scannerOverlay) return;
+  currentFeedMeals = buildFeedMeals(activeCravingId);
+  activeFeedIndex = 0;
+  renderScannerList();
+  updateScannerCravingChip();
+  updateFeedCard(0);
+  scannerOverlay.classList.add("is-active");
+  scannerOverlay.setAttribute("aria-hidden", "false");
+  scannerOverlay.setAttribute("data-view", "list");
+  document.body.classList.add("scanner-open");
+  toggleScannerPanels("list");
+}
+
+function closeScanner() {
+  if (!scannerOverlay) return;
+  scannerOverlay.classList.remove("is-active");
+  scannerOverlay.setAttribute("aria-hidden", "true");
+  toggleScannerPanels("list");
+  document.body.classList.remove("scanner-open");
+}
+
+function toggleScannerPanels(targetView) {
+  if (!scannerOverlay) return;
+  scannerOverlay.setAttribute("data-view", targetView);
+  scannerOverlay.querySelectorAll("[data-view-panel]").forEach((panel) => {
+    const isActive = panel.dataset.viewPanel === targetView;
+    panel.setAttribute("aria-hidden", String(!isActive));
+  });
+}
+
+function updateFeedCard(index) {
+  if (!feedCard) return;
+  if (!currentFeedMeals.length) {
+    feedCraving.textContent = "No matches";
+    feedTitle.textContent = "We’re still scanning nearby kitchens";
+    feedRestaurant.textContent = "";
+    feedPrice.textContent = "";
+    feedMeta.textContent = "Check back in a few minutes";
+    feedTags.innerHTML = "";
+    feedIndexLabel.textContent = "0/0";
+    feedNavButtons.forEach((button) => {
+      button.disabled = true;
+    });
+    return;
+  }
+
+  feedNavButtons.forEach((button) => {
+    button.disabled = false;
+  });
+
+  activeFeedIndex =
+    ((index % currentFeedMeals.length) + currentFeedMeals.length) %
+    currentFeedMeals.length;
+  const meal = currentFeedMeals[activeFeedIndex];
+  feedCraving.textContent = `${meal.emoji} ${meal.cravingLabel}`;
+  feedTitle.textContent = meal.name;
+  feedRestaurant.textContent = `${meal.restaurant} • ${meal.distance}`;
+  feedPrice.textContent = meal.price;
+  feedMeta.textContent = `${meal.rating.toFixed(1)}★ · ${meal.eta}`;
+  feedTags.innerHTML = meal.tags.map((tag) => `<span>${tag}</span>`).join("");
+  feedIndexLabel.textContent = `${activeFeedIndex + 1}/${currentFeedMeals.length}`;
+  feedCard.dataset.index = String(activeFeedIndex);
+}
+
+function enterFeedFromList(index) {
+  if (!currentFeedMeals.length) return;
+  updateFeedCard(index);
+  toggleScannerPanels("feed");
+}
+
+function shiftFeed(step) {
+  if (!currentFeedMeals.length) return;
+  updateFeedCard(activeFeedIndex + step);
+}
+
+function openRestaurantPage() {
+  const meal = currentFeedMeals[activeFeedIndex];
+  if (!meal) return;
+  const query = encodeURIComponent(`${meal.restaurant} ${meal.name}`);
+  window.open(`https://www.google.com/search?q=${query}`, "_blank", "noopener");
+}
+
+function handleGesture(deltaX, deltaY) {
+  const horizontal = Math.abs(deltaX);
+  const vertical = Math.abs(deltaY);
+  const horizontalThreshold = 70;
+  const verticalThreshold = 60;
+
+  if (horizontal > vertical && horizontal > horizontalThreshold) {
+    if (deltaX < 0) {
+      openRestaurantPage();
+    } else {
+      toggleScannerPanels("list");
+    }
+    return;
+  }
+
+  if (vertical > horizontal && vertical > verticalThreshold) {
+    if (deltaY < 0) {
+      shiftFeed(1);
+    } else {
+      shiftFeed(-1);
+    }
+  }
+}
+
+function wireFeedGestures() {
+  if (!feedCard) return;
+  feedCard.addEventListener("pointerdown", (event) => {
+    pointerStart = {
+      x: event.clientX,
+      y: event.clientY,
+      pointerId: event.pointerId,
+    };
+    feedCard.setPointerCapture(event.pointerId);
+  });
+
+  const resetPointer = () => {
+    pointerStart = null;
+  };
+
+  feedCard.addEventListener("pointerup", (event) => {
+    if (!pointerStart) return;
+    const deltaX = event.clientX - pointerStart.x;
+    const deltaY = event.clientY - pointerStart.y;
+    handleGesture(deltaX, deltaY);
+    feedCard.releasePointerCapture(pointerStart.pointerId);
+    resetPointer();
+  });
+
+  feedCard.addEventListener("pointercancel", resetPointer);
+}
+
+function handleScannerKeyNav(event) {
+  if (!scannerOverlay || !scannerOverlay.classList.contains("is-active"))
+    return;
+
+  if (event.key === "Escape") {
+    closeScanner();
+    return;
+  }
+
+  const view = scannerOverlay.getAttribute("data-view");
+  if (view !== "feed") return;
+  const key = event.key;
+  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(key)) {
+    event.preventDefault();
+  }
+
+  switch (key) {
+    case "ArrowUp":
+      shiftFeed(-1);
+      break;
+    case "ArrowDown":
+      shiftFeed(1);
+      break;
+    case "ArrowLeft":
+      openRestaurantPage();
+      break;
+    case "ArrowRight":
+      toggleScannerPanels("list");
+      break;
+    default:
+      break;
+  }
+}
+
+function initScanner() {
+  if (!startScannerBtn || !scannerOverlay || !scannerList) return;
+  startScannerBtn.addEventListener("click", () => {
+    openScanner();
+  });
+
+  closeScannerButtons.forEach((button) => {
+    button.addEventListener("click", closeScanner);
+  });
+
+  scannerOverlay.addEventListener("click", (event) => {
+    if (
+      event.target === scannerOverlay ||
+      event.target.classList.contains("scanner-backdrop")
+    ) {
+      closeScanner();
+    }
+  });
+
+  scannerList.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-index]");
+    if (!trigger) return;
+    enterFeedFromList(Number(trigger.dataset.index));
+  });
+
+  feedNavButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const step = button.dataset.feedNav === "next" ? 1 : -1;
+      shiftFeed(step);
+    });
+  });
+
+  backToListBtn?.addEventListener("click", () => {
+    toggleScannerPanels("list");
+  });
+
+  wireFeedGestures();
+  document.addEventListener("keydown", handleScannerKeyNav);
+}
+
 function wireScrollButtons() {
   document.querySelectorAll("[data-scroll]").forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -448,12 +739,23 @@ function initYear() {
   }
 }
 
+function updateScannerCravingChip() {
+  if (!scannerCravingLabel) return;
+  const craving = cravings.find((item) => item.id === activeCravingId);
+  if (!craving) {
+    scannerCravingLabel.textContent = "All cravings";
+    return;
+  }
+  scannerCravingLabel.textContent = `${craving.emoji} ${craving.label}`;
+}
+
 function init() {
   renderPills();
   setActiveCraving(activeCravingId);
   wireScrollButtons();
   wireCtaForm();
   initYear();
+  initScanner();
 }
 
 if (document.readyState === "loading") {

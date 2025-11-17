@@ -43,7 +43,9 @@
             and dietary needs.
           </p>
           <div class="hero-cta">
-            <button class="btn primary">Start scanning</button>
+            <button class="btn primary" id="startScannerBtn">
+              Start scanning
+            </button>
             <button class="btn secondary" data-scroll="#matches">
               See sample feed
             </button>
@@ -204,6 +206,93 @@
         </div>
       </section>
     </main>
+
+    <div
+      class="scanner-overlay"
+      id="scannerOverlay"
+      aria-hidden="true"
+      data-view="list"
+    >
+      <div class="scanner-backdrop" data-close-scanner></div>
+      <div class="scanner-shell">
+        <section class="scanner-view list-view" data-view-panel="list">
+          <header class="scanner-header">
+            <div>
+              <p class="eyebrow">Instant picks</p>
+              <p class="craving-chip" id="scannerCravingLabel"></p>
+              <h3>Hand-picked meals for today</h3>
+              <p class="subtext">
+                Tap any row to jump into a TikTok-style stream of dishes. Swipe
+                right once you're ready to head back here.
+              </p>
+            </div>
+            <button
+              class="icon-btn"
+              type="button"
+              data-close-scanner
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </header>
+          <ul
+            class="scanner-list"
+            id="scannerList"
+            role="listbox"
+            aria-label="Meal picks"
+          ></ul>
+        </section>
+
+        <section
+          class="scanner-view feed-view"
+          data-view-panel="feed"
+          aria-hidden="true"
+        >
+          <header class="scanner-header feed">
+            <button class="pill-link" type="button" data-back-to-list>
+              ← Back to all meals
+            </button>
+            <span class="feed-progress" id="feedIndex"></span>
+            <button
+              class="icon-btn"
+              type="button"
+              data-close-scanner
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </header>
+          <div class="feed-stage">
+            <article
+              class="feed-card"
+              id="feedCard"
+              tabindex="0"
+              aria-live="polite"
+            >
+              <p class="feed-label" id="feedCraving"></p>
+              <h3 class="feed-title" id="feedTitle"></h3>
+              <p class="feed-restaurant" id="feedRestaurant"></p>
+              <p class="feed-price" id="feedPrice"></p>
+              <div class="feed-meta" id="feedMeta"></div>
+              <div class="feed-tags" id="feedTags"></div>
+            </article>
+          </div>
+          <div class="feed-instructions">
+            <div><span>Swipe ↑ / ↓</span> Next dish</div>
+            <div><span>Swipe ←</span> Restaurant page</div>
+            <div><span>Swipe →</span> Back to list</div>
+          </div>
+          <div class="feed-buttons">
+            <button class="btn secondary" type="button" data-feed-nav="prev">
+              Prev
+            </button>
+            <button class="btn primary" type="button" data-feed-nav="next">
+              Next
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <p>© <span id="year"></span> BiteWise. Meals that match your mood.</p>
