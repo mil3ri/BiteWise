@@ -263,19 +263,36 @@
             </button>
           </header>
           <div class="feed-stage">
-            <article
-              class="feed-card"
-              id="feedCard"
-              tabindex="0"
-              aria-live="polite"
-            >
-              <p class="feed-label" id="feedCraving"></p>
-              <h3 class="feed-title" id="feedTitle"></h3>
-              <p class="feed-restaurant" id="feedRestaurant"></p>
-              <p class="feed-price" id="feedPrice"></p>
-              <div class="feed-meta" id="feedMeta"></div>
-              <div class="feed-tags" id="feedTags"></div>
-            </article>
+            <div class="feed-card-stack">
+              <article
+                class="feed-card"
+                id="feedCard"
+                tabindex="0"
+                aria-live="polite"
+              >
+                <p class="feed-label" id="feedCraving"></p>
+                <h3 class="feed-title" id="feedTitle"></h3>
+                <p class="feed-restaurant" id="feedRestaurant"></p>
+                <p class="feed-price" id="feedPrice"></p>
+                <div class="feed-meta" id="feedMeta"></div>
+                <div class="feed-tags" id="feedTags"></div>
+              </article>
+              <article
+                class="feed-card feed-card--preview"
+                id="feedPreview"
+                aria-hidden="true"
+              >
+                <p class="feed-preview-label" id="feedPreviewLabel"></p>
+                <p class="feed-preview-title" id="feedPreviewTitle"></p>
+                <p class="feed-preview-meta" id="feedPreviewMeta"></p>
+              </article>
+              <div class="swipe-hint swipe-hint--left" data-swipe-hint="left">
+                Open restaurant ↗
+              </div>
+              <div class="swipe-hint swipe-hint--right" data-swipe-hint="right">
+                Back to list →
+              </div>
+            </div>
           </div>
           <div class="feed-instructions">
             <div><span>Swipe ↑ / ↓</span> Next dish</div>

@@ -334,14 +334,21 @@ const feedMeta = document.getElementById("feedMeta");
 const feedTags = document.getElementById("feedTags");
 const feedCraving = document.getElementById("feedCraving");
 const feedIndexLabel = document.getElementById("feedIndex");
+const feedPreviewCard = document.getElementById("feedPreview");
+const feedPreviewLabel = document.getElementById("feedPreviewLabel");
+const feedPreviewTitle = document.getElementById("feedPreviewTitle");
+const feedPreviewMeta = document.getElementById("feedPreviewMeta");
 const feedNavButtons = document.querySelectorAll("[data-feed-nav]");
 const backToListBtn = document.querySelector("[data-back-to-list]");
 const closeScannerButtons = document.querySelectorAll("[data-close-scanner]");
 const scannerCravingLabel = document.getElementById("scannerCravingLabel");
+const swipeHintLeft = document.querySelector("[data-swipe-hint='left']");
+const swipeHintRight = document.querySelector("[data-swipe-hint='right']");
 
 let activeCravingId = cravings[0].id;
 let activeFeedIndex = 0;
 let pointerStart = null;
+let dragIntent = null;
 let currentFeedMeals = [];
 
 const buildPill = ({ id, label, description, emoji }) => {
@@ -544,6 +551,7 @@ function updateFeedCard(index) {
     feedNavButtons.forEach((button) => {
       button.disabled = true;
     });
+    resetFeedPreview(true);
     return;
   }
 
@@ -563,6 +571,133 @@ function updateFeedCard(index) {
   feedTags.innerHTML = meal.tags.map((tag) => `<span>${tag}</span>`).join("");
   feedIndexLabel.textContent = `${activeFeedIndex + 1}/${currentFeedMeals.length}`;
   feedCard.dataset.index = String(activeFeedIndex);
+  setFeedPreview(1);
+  resetFeedPreview();
+}
+
+function setFeedPreview(step = 1) {
+  if (!feedPreviewCard || !currentFeedMeals.length) return;
+  const max = currentFeedMeals.length;
+  const previewIndex = (((activeFeedIndex + step) % max) + max) % max;
+  const meal = currentFeedMeals[previewIndex];
+  if (!meal) return;
+  if (feedPreviewLabel) {
+    feedPreviewLabel.textContent = `${meal.emoji} ${meal.cravingLabel}`;
+  }
+  if (feedPreviewTitle) {
+    feedPreviewTitle.textContent = meal.name;
+  }
+  if (feedPreviewMeta) {
+    feedPreviewMeta.textContent = `${meal.restaurant} • ${meal.distance} • ${meal.price}`;
+  }
+  feedPreviewCard.dataset.direction = step > 0 ? "next" : "prev";
+}
+
+function resetFeedPreview(clearContent = false) {
+  if (!feedPreviewCard) return;
+  feedPreviewCard.style.opacity = "";
+  feedPreviewCard.style.transform = "";
+  if (clearContent) {
+    if (feedPreviewLabel) feedPreviewLabel.textContent = "";
+    if (feedPreviewTitle) feedPreviewTitle.textContent = "";
+    if (feedPreviewMeta) feedPreviewMeta.textContent = "";
+  }
+}
+
+function updateSwipeHint(direction, progress) {
+  const target = direction === "left" ? swipeHintLeft : swipeHintRight;
+  const other = direction === "left" ? swipeHintRight : swipeHintLeft;
+  if (target) {
+    target.style.opacity = `${progress}`;
+  }
+  if (other && other !== target) {
+    other.style.opacity = "";
+  }
+}
+
+function resetSwipeHints() {
+  [swipeHintLeft, swipeHintRight].forEach((hint) => {
+    if (hint) {
+      hint.style.opacity = "";
+    }
+  });
+}
+
+function applyVerticalDrag(deltaY) {
+  if (!feedCard) return;
+  const maxPull = 180;
+  const clamped = Math.max(Math.min(deltaY, maxPull), -maxPull);
+  if (Math.abs(clamped) < 4) {
+    feedCard.style.transform = "";
+    feedCard.style.opacity = "";
+    resetFeedPreview();
+    return;
+  }
+
+  const directionStep = clamped < 0 ? 1 : -1;
+  setFeedPreview(directionStep);
+  const progress = Math.min(Math.abs(clamped) / maxPull, 1);
+  feedCard.style.transform = `translateY(${clamped * 0.3}px) scale(${1 - progress * 0.04})`;
+  feedCard.style.opacity = `${1 - progress * 0.12}`;
+
+  if (feedPreviewCard) {
+    feedPreviewCard.style.opacity = `${progress}`;
+    const baseOffset = directionStep > 0 ? 90 : -90;
+    const previewY = baseOffset * (1 - progress);
+    feedPreviewCard.style.transform = `translate(-50%, ${previewY}px) scale(${0.92 + progress * 0.08})`;
+  }
+}
+
+function applyHorizontalDrag(deltaX) {
+  if (!feedCard) return;
+  const maxSlide = 140;
+  const clamped = Math.max(Math.min(deltaX, maxSlide), -maxSlide);
+  if (Math.abs(clamped) < 4) {
+    feedCard.style.transform = "";
+    feedCard.style.opacity = "";
+    resetSwipeHints();
+    return;
+  }
+
+  const progress = Math.min(Math.abs(clamped) / maxSlide, 1);
+  feedCard.style.transform = `translateX(${clamped * 0.4}px) rotate(${(clamped / maxSlide) * 4}deg)`;
+  feedCard.style.opacity = `${1 - progress * 0.08}`;
+  const direction = clamped < 0 ? "left" : "right";
+  updateSwipeHint(direction, progress);
+}
+
+function settleInteractiveCard() {
+  if (!feedCard) return;
+  feedCard.style.transition = "transform 220ms ease, opacity 220ms ease";
+  feedCard.style.transform = "";
+  feedCard.style.opacity = "";
+  feedCard.addEventListener(
+    "transitionend",
+    () => {
+      if (feedCard) {
+        feedCard.style.transition = "";
+      }
+    },
+    { once: true },
+  );
+
+  if (feedPreviewCard) {
+    feedPreviewCard.style.transition =
+      "transform 220ms ease, opacity 220ms ease";
+    feedPreviewCard.style.transform = "";
+    feedPreviewCard.style.opacity = "";
+    feedPreviewCard.addEventListener(
+      "transitionend",
+      () => {
+        if (feedPreviewCard) {
+          feedPreviewCard.style.transition = "";
+        }
+      },
+      { once: true },
+    );
+  }
+
+  resetSwipeHints();
 }
 
 function enterFeedFromList(index) {
@@ -583,13 +718,16 @@ function openRestaurantPage() {
   window.open(`https://www.google.com/search?q=${query}`, "_blank", "noopener");
 }
 
-function handleGesture(deltaX, deltaY) {
+function handleGesture(deltaX, deltaY, intent = null) {
   const horizontal = Math.abs(deltaX);
   const vertical = Math.abs(deltaY);
   const horizontalThreshold = 70;
   const verticalThreshold = 60;
 
-  if (horizontal > vertical && horizontal > horizontalThreshold) {
+  if (
+    (intent === "horizontal" || horizontal > vertical) &&
+    horizontal > horizontalThreshold
+  ) {
     if (deltaX < 0) {
       openRestaurantPage();
     } else {
@@ -598,7 +736,10 @@ function handleGesture(deltaX, deltaY) {
     return;
   }
 
-  if (vertical > horizontal && vertical > verticalThreshold) {
+  if (
+    (intent === "vertical" || vertical > horizontal) &&
+    vertical > verticalThreshold
+  ) {
     if (deltaY < 0) {
       shiftFeed(1);
     } else {
@@ -609,28 +750,9 @@ function handleGesture(deltaX, deltaY) {
 
 function wireFeedGestures() {
   if (!feedCard) return;
-  const applyTransform = (deltaX = 0, deltaY = 0) => {
-    if (!feedCard) return;
-    const fade = Math.min(Math.abs(deltaY) / 320, 0.45);
-    feedCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    feedCard.style.opacity = `${1 - fade}`;
-  };
-
-  const settleCard = () => {
-    if (!feedCard) return;
-    feedCard.style.transition = "transform 200ms ease, opacity 200ms ease";
-    requestAnimationFrame(() => {
-      applyTransform();
-      feedCard?.addEventListener(
-        "transitionend",
-        () => {
-          if (feedCard) {
-            feedCard.style.transition = "";
-          }
-        },
-        { once: true },
-      );
-    });
+  const resetPointer = () => {
+    pointerStart = null;
+    dragIntent = null;
   };
 
   feedCard.addEventListener("pointerdown", (event) => {
@@ -639,36 +761,51 @@ function wireFeedGestures() {
       y: event.clientY,
       pointerId: event.pointerId,
     };
+    dragIntent = null;
     feedCard.setPointerCapture(event.pointerId);
     feedCard.style.transition = "";
+    if (feedPreviewCard) {
+      feedPreviewCard.style.transition = "";
+    }
+    resetSwipeHints();
+    resetFeedPreview();
   });
-
-  const resetPointer = () => {
-    pointerStart = null;
-  };
 
   feedCard.addEventListener("pointermove", (event) => {
     if (!pointerStart) return;
     const deltaX = event.clientX - pointerStart.x;
     const deltaY = event.clientY - pointerStart.y;
-    applyTransform(deltaX, deltaY);
+
+    if (!dragIntent) {
+      if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+        dragIntent =
+          Math.abs(deltaY) > Math.abs(deltaX) ? "vertical" : "horizontal";
+      } else {
+        return;
+      }
+    }
+
+    if (dragIntent === "vertical") {
+      applyVerticalDrag(deltaY);
+    } else {
+      applyHorizontalDrag(deltaX);
+    }
   });
 
   feedCard.addEventListener("pointerup", (event) => {
     if (!pointerStart) return;
     const deltaX = event.clientX - pointerStart.x;
     const deltaY = event.clientY - pointerStart.y;
-    handleGesture(deltaX, deltaY);
+    handleGesture(deltaX, deltaY, dragIntent);
     feedCard.releasePointerCapture(pointerStart.pointerId);
-    settleCard();
+    settleInteractiveCard();
     resetPointer();
   });
 
   feedCard.addEventListener("pointercancel", () => {
-    if (pointerStart) {
-      feedCard.releasePointerCapture(pointerStart.pointerId);
-    }
-    settleCard();
+    if (!pointerStart) return;
+    feedCard.releasePointerCapture(pointerStart.pointerId);
+    settleInteractiveCard();
     resetPointer();
   });
 }
