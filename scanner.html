@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteWise Scanner Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card {
+            backdrop-filter: blur(18px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <div class="min-h-screen bg-white text-gray-900 overflow-hidden">
+        <div class="absolute inset-x-0 -top-48 h-96 bg-gradient-to-br from-pink-200 via-white to-green-100 blur-[100px] opacity-60 pointer-events-none"></div>
+        <nav class="container mx-auto px-6 py-6 flex flex-wrap gap-4 justify-between items-center relative z-10">
+            <div class="flex items-center gap-3">
+                <svg width="40" height="50" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#22C55E" fill-rule="evenodd" d="
+                        M 100,20 
+                        C 160,20 180,50 180,95      
+                        C 180,140 140,170 100,185  
+                        
+                        L 108,185                 
+                        L 108,215                 
+                        L 126,215                 
+                        L 126,285                 
+                        A 6,6 0 0,1 114,285       
+                        L 114,250                 
+                        A 4,4 0 0,0 106,250       
+                        L 106,285                 
+                        A 6,6 0 0,1 94,285        
+                        L 94,250                  
+                        A 4,4 0 0,0 86,250        
+                        L 86,285                  
+                        A 6,6 0 0,1 74,285        
+                        L 74,215                  
+                        L 92,215                  
+                        L 92,185                  
+                        
+                        C 60,170 20,140 20,95 
+                        C 20,50 40,20 100,20 
+                        Z 
+                        
+                        M 100,70 
+                        A 25,25 0 1,0 100,120 
+                        A 25,25 0 1,0 100,70 
+                    "/>
+                </svg>
+                <span class="text-2xl font-bold tracking-tight">BiteWise</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 text-sm font-semibold">
+                <a href="index.html" class="text-gray-700 hover:text-pink-500 transition">Home</a>
+                <a href="home.html" class="text-gray-700 hover:text-pink-500 transition">Legacy demo</a>
+            </div>
+            <a href="#scanner" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 px-5 rounded-full shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-0.5 text-sm">Jump to scanner</a>
+        </nav>
+
+        <main class="relative z-10">
+            <section id="scanner" class="container mx-auto px-6 py-12">
+                <div class="max-w-3xl mx-auto text-center mb-10">
+                    <p class="text-sm font-semibold tracking-[0.3em] text-gray-500 uppercase">Swipe-only demo</p>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mt-3 mb-4">Meal list on the left, swipe screen on demand.</h1>
+                    <p class="text-lg text-gray-600">Tap any dish to pull up the TikTok-style card. No filters—just the curated feed BiteWise would show to a hungry user.</p>
+                </div>
+
+                <div class="grid gap-8 lg:grid-cols-[minmax(0,360px)_1fr]">
+                    <div class="rounded-3xl border border-gray-100 bg-white/90 glass-card p-6 shadow-lg flex flex-col gap-6">
+                        <div class="flex flex-col gap-1">
+                            <p class="text-sm font-semibold tracking-[0.3em] text-gray-500 uppercase">Meal list</p>
+                            <h2 class="text-2xl font-bold">Live matches</h2>
+                            <p class="text-sm text-gray-500">Tap a row to open the swipe screen. On desktop, the card appears on the right automatically.</p>
+                        </div>
+                        <ul id="scannerList" class="flex flex-col gap-3 max-h-[520px] overflow-y-auto pr-1" aria-live="polite"></ul>
+                        <p id="scannerStatus" class="text-sm text-gray-500"></p>
+                    </div>
+                    <div class="hidden fixed inset-0 z-40 overflow-y-auto bg-white px-4 py-6 sm:px-6 lg:relative lg:inset-auto lg:z-auto lg:flex lg:flex-col lg:gap-6 lg:rounded-3xl lg:border lg:border-gray-100 lg:bg-gradient-to-b lg:from-white lg:to-pink-50 lg:shadow-lg" data-feed-panel aria-hidden="true">
+                        <div class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+                            <div>
+                                <p class="text-sm font-semibold tracking-[0.3em] text-gray-500 uppercase">Swipe deck</p>
+                                <h3 class="text-2xl font-bold">Immersive card</h3>
+                                <p class="text-sm text-gray-500">Thumb through matches with real-time ratings, distance, and badges.</p>
+                            </div>
+                            <button type="button" class="lg:hidden inline-flex items-center justify-center rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700" data-close-feed>
+                                ← Back to meal list
+                            </button>
+                        </div>
+                        <article class="rounded-3xl bg-white border border-gray-100 p-6 shadow-lg space-y-4" id="feedCard">
+                            <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-gray-400">
+                                <span id="feedCraving">Loading…</span>
+                                <span id="feedIndex">0 / 0</span>
+                            </div>
+                            <div>
+                                <h4 id="feedTitle" class="text-2xl font-bold">—</h4>
+                                <p id="feedRestaurant" class="text-sm text-gray-500 mt-1">—</p>
+                            </div>
+                            <p id="feedPrice" class="text-xl font-semibold text-gray-900">—</p>
+                            <div id="feedMeta" class="flex flex-wrap gap-3 text-sm text-gray-600"></div>
+                            <div id="feedTags" class="flex flex-wrap gap-2"></div>
+                        </article>
+                        <div class="flex flex-col gap-3 rounded-3xl border border-gray-200 bg-white/70 p-4 text-sm text-gray-600">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">Up next</span>
+                                <span id="feedPreview" class="text-gray-500">Queue loading…</span>
+                            </div>
+                            <div class="flex gap-3 flex-wrap">
+                                <button class="flex-1 rounded-2xl border border-gray-200 bg-white py-3 font-semibold text-sm hover:border-pink-400 transition" data-feed-nav="prev">Previous</button>
+                                <button class="flex-1 rounded-2xl border border-gray-200 bg-white py-3 font-semibold text-sm hover:border-pink-400 transition" data-feed-nav="next">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden fixed inset-0 z-30 bg-black/40 lg:hidden" data-feed-overlay aria-hidden="true"></div>
+            </section>
+        </main>
+
+        <footer class="border-t border-gray-100 bg-white/90">
+            <div class="container mx-auto px-6 py-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-sm text-gray-500">
+                <p>© <span id="scannerYear"></span> BiteWise. Meals that match your mood.</p>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="index.html" class="hover:text-pink-500">Marketing</a>
+                    <a href="home.html" class="hover:text-pink-500">Legacy landing</a>
+                    <a href="data/meals.json" class="hover:text-pink-500">Sample data</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script defer src="scanner.js"></script>
+</body>
+</html>

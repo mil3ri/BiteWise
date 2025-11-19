@@ -1,368 +1,301 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BiteWise | Smarter meal matches</title>
-    <meta
-      name="description"
-      content="Tell BiteWise how you want to eat today and instantly see curated dishes from nearby restaurants."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
-  </head>
-  <body>
-    <div class="background-noise" aria-hidden="true"></div>
-    <div class="background-orb orb-one" aria-hidden="true"></div>
-    <div class="background-orb orb-two" aria-hidden="true"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteWise - Smart Food Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="eng493/dist/assets/index-BFJ70xlP.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .phone-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #020617;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
 
-    <header class="site-header">
-      <div class="logo">BiteWise</div>
-      <nav>
-        <a href="#cravings">Cravings</a>
-        <a href="#matches">Matches</a>
-        <a href="#how">How it works</a>
-      </nav>
-      <button class="btn ghost">Join beta</button>
-    </header>
+    <!-- Main Container with White Background -->
+    <div class="min-h-screen bg-white text-gray-900 overflow-hidden relative">
+        
+        <!-- Decorational Gradient Blur -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gray-200 opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
+        <!-- Navigation -->
+        <nav class="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+            <div class="flex items-center gap-3">
+                <!-- Logo -->
+                <svg width="40" height="50" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#22C55E" fill-rule="evenodd" d="
+                        M 100,20 
+                        C 160,20 180,50 180,95      
+                        C 180,140 140,170 100,185  
+                        
+                        L 108,185                 
+                        L 108,215                 
+                        L 126,215                 
+                        L 126,285                 
+                        A 6,6 0 0,1 114,285       
+                        L 114,250                 
+                        A 4,4 0 0,0 106,250       
+                        L 106,285                 
+                        A 6,6 0 0,1 94,285        
+                        L 94,250                  
+                        A 4,4 0 0,0 86,250        
+                        L 86,285                  
+                        A 6,6 0 0,1 74,285        
+                        L 74,215                  
+                        L 92,215                  
+                        L 92,185                  
+                        
+                        C 60,170 20,140 20,95 
+                        C 20,50 40,20 100,20 
+                        Z 
+                        
+                        M 100,70 
+                        A 25,25 0 1,0 100,120 
+                        A 25,25 0 1,0 100,70 
+                        Z" 
+                    />
+                </svg>
+                <span class="text-2xl font-bold tracking-tight">BiteWise</span>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-l font-semibold text-gray-900">
+                <a href="#" class="hover:text-pink-400 transition">HOW IT WORKS</a>
+                <a href="#" class="hover:text-pink-400 transition">LOCATIONS</a>
+                <a href="#" class="hover:text-pink-400 transition">FOR RESTAURANTS</a>
+            </div>
 
-    <main>
-      <section class="hero" id="top">
-        <div class="hero-content">
-          <p class="eyebrow">Personalized meal scouting • Real restaurants</p>
-          <h1>Tell us your craving. We'll scan every nearby menu.</h1>
-          <p class="lead">
-            BiteWise watches the feeds of 1,200+ local restaurants in real-time.
-            Tap a craving and instantly see dishes that match your mood, budget,
-            and dietary needs.
-          </p>
-          <div class="hero-cta">
-            <button class="btn primary" id="startScannerBtn">
-              Start scanning
-            </button>
-            <button class="btn secondary" data-scroll="#matches">
-              See sample feed
-            </button>
-          </div>
-          <div class="hero-stats">
-            <div>
-              <span class="stat">1.2k</span>
-              <span class="label">Menus monitored</span>
-            </div>
-            <div>
-              <span class="stat">18 min</span>
-              <span class="label">Avg. delivery ETA</span>
-            </div>
-            <div>
-              <span class="stat">92%</span>
-              <span class="label">Match accuracy</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="app-frame">
-            <div class="app-header">
-              <span>Today’s cravings</span>
-              <span class="status-pill">Live scan</span>
-            </div>
-            <div class="pill-stack" id="heroPills">
-              <button class="mini-pill active">Big & Cheap</button>
-              <button class="mini-pill">Low calorie</button>
-              <button class="mini-pill">Spicy</button>
-              <button class="mini-pill">Flavorful</button>
-            </div>
-            <div class="app-card">
-              <div class="card-top">
-                <div>
-                  <p class="card-label">Top match</p>
-                  <p class="card-title">Firecracker Gochu Bowl</p>
+            <a href="scanner.html" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1 text-sm">
+                TRY DEMO
+            </a>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="container mx-auto px-6 pt-10 pb-20 flex flex-col lg:flex-row items-center relative z-10">
+            
+            <!-- Left Column: Copy -->
+            <div class="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0">
+                <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                    Find <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-300">Healthy</span> Meals That Fit <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-300">You</span>
+                </h1>
+                
+                <p class="text-gray-900 text-lg mb-10 leading-relaxed">
+                    BiteWise lists all the meals around you according to your dietary preferences, removing the need to search through multiple menus.
+                </p>
+
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-4 px-10 rounded-full shadow-xl shadow-pink-500/40 transition transform hover:-translate-y-1">
+                        JOIN BETA
+                    </button>
+                    <span class="text-pink-500 font-black uppercase tracking-[0.2em] text-xs sm:text-sm">
+                        Eat healthier. Save time. Try BiteWise now
+                    </span>
                 </div>
-                <span class="price">$11.90</span>
-              </div>
-              <p class="restaurant">Seoul Factory • 0.6 mi</p>
-              <ul class="card-tags">
-                <li>Spicy</li>
-                <li>2x protein</li>
-                <li>18 min ETA</li>
-              </ul>
             </div>
-            <div class="app-footer">
-              <p>Scanning 24 menus near Capitol Hill…</p>
+
+            <!-- Right Column: Image Representation -->
+            <div class="lg:w-1/2 relative">
+                <!-- Phone Container -->
+                <div class="relative mx-auto w-72 h-[500px] bg-gray-900 rounded-[3rem] border-8 border-gray-800 shadow-2xl overflow-hidden z-20">
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-gray-700 rounded-full z-30"></div>
+                    <div class="absolute top-4 right-10 w-5 h-5 rounded-full border border-gray-700"></div>
+                    <!-- Screen Content -->
+                    <div class="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-black">
+                        <iframe
+                            src="scanner.html"
+                            title="BiteWise App Preview"
+                            class="phone-iframe absolute inset-0"
+                            loading="lazy"
+                        ></iframe>
+                        <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/5"></div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
 
-      <section class="preferences" id="cravings">
-        <div class="section-heading">
-          <p class="eyebrow">Craving board</p>
-          <h2>Tap the vibe you’re feeling today.</h2>
-          <p class="subtext">
-            We’ll adapt portions, price points, and dietary tags instantly.
-          </p>
-        </div>
-        <div
-          class="pill-grid"
-          id="preferenceGrid"
-          role="list"
-          aria-live="polite"
-        ></div>
-      </section>
+        <!-- Feature Highlights Section -->
+        <section class="relative z-10 bg-white pb-24">
+            <div class="container mx-auto px-6 space-y-10">
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-sm font-semibold tracking-widest text-black uppercase">Why BiteWise</p>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-black">Smarter healthy eating in minutes</h2>
+                </div>
 
-      <section class="matches" id="matches">
-        <div class="section-heading">
-          <p class="eyebrow">Live menu matches</p>
-          <h2>
-            BiteWise is showing
-            <span id="activeCraving">Big & Cheap</span> dishes from restaurants
-            that can serve you right now.
-          </h2>
-        </div>
-        <div class="cards-grid" id="matchList"></div>
-      </section>
+                <ul class="max-w-3xl mx-auto space-y-6">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold text-black">Location-based suggestions</p>
+                            <p class="text-base text-gray-900">Instantly see the healthiest options near you.</p>
+                        </div>
+                    </li>
 
-      <section class="how-it-works" id="how">
-        <div class="section-heading">
-          <p class="eyebrow">How BiteWise works</p>
-          <h2>Smarter than endless scrolling.</h2>
-        </div>
-        <div class="steps">
-          <article class="step">
-            <span class="step-number">1</span>
-            <h3>Declare your craving</h3>
-            <p>
-              Mix & match mood, dietary style, price ceiling, and portion size.
-              We turn it into a precise flavor profile.
-            </p>
-          </article>
-          <article class="step">
-            <span class="step-number">2</span>
-            <h3>Menus get parsed instantly</h3>
-            <p>
-              Our AI ingestion engine scans live menus, delivery apps, and POS
-              feeds across your city every 8 minutes.
-            </p>
-          </article>
-          <article class="step">
-            <span class="step-number">3</span>
-            <h3>Matches stream in</h3>
-            <p>
-              We score dishes by fit, distance, and freshness, then show you
-              just the three best options to act on.
-            </p>
-          </article>
-        </div>
-      </section>
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold text-black">Personalized to your diet</p>
+                            <p class="text-base text-gray-900">Vegan, gluten-free, high-protein, low-calorie — whatever fits your goals.</p>
+                        </div>
+                    </li>
 
-      <section class="proof">
-        <div class="metric">
-          <span class="stat">286</span>
-          <span class="label">Neighborhoods covered</span>
-        </div>
-        <div class="metric">
-          <span class="stat">38%</span>
-          <span class="label">Cheaper than delivery apps</span>
-        </div>
-        <div class="metric">
-          <span class="stat">4.9★</span>
-          <span class="label">Taste satisfaction score</span>
-        </div>
-        <div class="partners">
-          <p class="label">Seen in</p>
-          <div class="partner-logos">
-            <span>FoodTech Weekly</span>
-            <span>Urban Bites</span>
-            <span>City Spoon</span>
-          </div>
-        </div>
-      </section>
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold text-black">Saves time</p>
+                            <p class="text-base text-gray-900">No more checking 10 different menus. BiteWise does the filtering for you.</p>
+                        </div>
+                    </li>
 
-      <section class="cta" id="cta">
-        <div class="cta-card">
-          <div>
-            <p class="eyebrow">Early access</p>
-            <h2>Be first to auto-curate your meals.</h2>
-            <p>
-              Drop your email and we’ll send you an invite when BiteWise
-              launches in your neighborhood.
-            </p>
-          </div>
-          <form class="cta-form">
-            <label class="sr-only" for="emailInput">Email</label>
-            <input
-              id="emailInput"
-              type="email"
-              placeholder="you@example.com"
-              required
-            />
-            <button type="submit" class="btn primary">Notify me</button>
-          </form>
-        </div>
-      </section>
-    </main>
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold text-black">Transparent nutrition info</p>
+                            <p class="text-base text-gray-900">See calories, macros, and ingredients at a glance.</p>
+                        </div>
+                    </li>
 
-    <div
-      class="scanner-overlay"
-      id="scannerOverlay"
-      aria-hidden="true"
-      data-view="filters"
-    >
-      <div class="scanner-backdrop" data-close-scanner></div>
-      <div class="scanner-shell">
-        <section class="scanner-view filter-view" data-view-panel="filters">
-          <header class="scanner-header">
-            <div>
-              <p class="eyebrow">Dial in your cravings</p>
-              <h3>Toggle the tags you want BiteWise to scan.</h3>
-              <p class="subtext">
-                Everything is on by default—switch off any vibes you’re not
-                feeling before we pull your matches.
-              </p>
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-semibold text-black">Smart healthy scoring <span class="text-xs font-normal text-gray-500 align-middle">(optional)</span></p>
+                            <p class="text-base text-gray-900">Meals get a “health rating” so you can pick the best one easily.</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <button
-              class="icon-btn"
-              type="button"
-              data-close-scanner
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </header>
-          <div class="filter-body">
-            <div
-              class="filter-chip-grid"
-              id="filterChipGrid"
-              role="group"
-              aria-label="Scanner tag filters"
-            ></div>
-            <div class="filter-actions">
-              <button class="pill-link" type="button" data-filter-select-all>
-                Select all
-              </button>
-              <div class="filter-summary">
-                <p id="filterSummary">All cravings active</p>
-                <button class="btn primary" type="button" data-filter-apply>
-                  Show matches
-                </button>
-              </div>
-            </div>
-          </div>
         </section>
 
-        <section class="scanner-view list-view" data-view-panel="list">
-          <header class="scanner-header">
-            <div>
-              <p class="eyebrow">Instant picks</p>
-              <p class="craving-chip" id="scannerCravingLabel"></p>
-              <h3>Hand-picked meals for today</h3>
-              <p class="subtext">
-                Tap any row to jump into a TikTok-style stream of dishes. Swipe
-                right once you're ready to head back here.
-              </p>
+        <!-- How It Works Section -->
+        <section class="relative z-10 bg-green-500 pb-22 pt-32">
+            <div class="absolute inset-x-0 top-0">
+            <svg viewBox="0 0 1440 240" xmlns="http://www.w3.org/2000/svg" class="w-full h-32" preserveAspectRatio="none">
+                <defs>
+                <linearGradient id="squiggleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="100%" stop-color="#bbf7d0"/>
+                </linearGradient>
+                </defs>
+                <path d="M0,80 C180,40 360,140 540,120 C720,100 900,20 1080,60 C1260,100 1350,120 1440,100 L1440,0 L0,0 Z" fill="url(#squiggleGradient)"/>
+            </svg>
             </div>
-            <div class="scanner-actions">
-              <button class="pill-link" type="button" data-open-filters>
-                Adjust filters
-              </button>
-              <button
-                class="icon-btn"
-                type="button"
-                data-close-scanner
-                aria-label="Close"
-              >
-                ✕
-              </button>
+            <div class="container mx-auto px-6 pb-24">
+            <div class="text-center mb-14">
+                <p class="text-sm font-semibold tracking-widest text-white uppercase">How it works?</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white">Healthy meals in three quick steps</h2>
             </div>
-          </header>
-          <ul
-            class="scanner-list"
-            id="scannerList"
-            role="listbox"
-            aria-label="Meal picks"
-          ></ul>
+
+            <div class="grid gap-8 md:grid-cols-3">
+                <!-- Step 1 -->
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="flex items-center gap-4">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <p class="text-sm font-semibold tracking-wide text-black">Tell us your diet</p>
+                </div>
+                <p class="text-base font-medium text-black">
+                    Choose vegan, vegetarian, gluten-free, keto, or your own preferences.
+                </p>
+                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">1</span>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="flex items-center gap-4">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <p class="text-sm font-semibold tracking-wide text-black">Let us detect your location</p>
+                </div>
+                <p class="text-base font-medium text-black">
+                    See all healthy options near you.
+                </p>
+                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">2</span>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="flex items-center gap-4">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <p class="text-sm font-semibold tracking-wide text-black">Get instant suggestions</p>
+                </div>
+                <p class="text-base font-medium text-black">
+                    Pick your meal confidently.
+                </p>
+                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">3</span>
+                </div>
+            </div>
+            </div>
         </section>
 
-        <section
-          class="scanner-view feed-view"
-          data-view-panel="feed"
-          aria-hidden="true"
-        >
-          <header class="scanner-header feed">
-            <button class="pill-link" type="button" data-back-to-list>
-              ← Back to all meals
-            </button>
-            <span class="feed-progress" id="feedIndex"></span>
-            <button
-              class="icon-btn"
-              type="button"
-              data-close-scanner
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </header>
-          <div class="feed-stage">
-            <div class="feed-card-stack">
-              <article
-                class="feed-card"
-                id="feedCard"
-                tabindex="0"
-                aria-live="polite"
-              >
-                <p class="feed-label" id="feedCraving"></p>
-                <h3 class="feed-title" id="feedTitle"></h3>
-                <p class="feed-restaurant" id="feedRestaurant"></p>
-                <p class="feed-price" id="feedPrice"></p>
-                <div class="feed-meta" id="feedMeta"></div>
-                <div class="feed-tags" id="feedTags"></div>
-              </article>
-              <article
-                class="feed-card feed-card--preview"
-                id="feedPreview"
-                aria-hidden="true"
-              >
-                <p class="feed-preview-label" id="feedPreviewLabel"></p>
-                <p class="feed-preview-title" id="feedPreviewTitle"></p>
-                <p class="feed-preview-meta" id="feedPreviewMeta"></p>
-              </article>
-              <div class="swipe-hint swipe-hint--left" data-swipe-hint="left">
-                Open restaurant ↗
-              </div>
-              <div class="swipe-hint swipe-hint--right" data-swipe-hint="right">
-                Back to list →
-              </div>
+        <!-- Social Proof / Footer Strip -->
+        <div class="backdrop-blur-sm" style="background-color:#22c55e;box-shadow:0 -20px 40px rgba(0,0,0,0.2);">
+
+            <div class="container mx-auto px-6 py-8 flex flex-wrap justify-between items-center gap-8">
+                
+                <!-- Item 1 -->
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl text-white"><i class="fa-solid fa-leaf"></i></div>
+                    <div>
+                        <p class="font-bold text-white text-xl">Dietary AI</p>
+                        <p class="text-s text-gray-900">Advanced Allergen Filtering</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl text-white"><i class="fa-brands fa-google"></i></div>
+                    <div>
+                        <p class="font-bold text-white text-xl">Google Maps</p>
+                        <p class="text-s text-gray-900">Integrated Navigation</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-center gap-4">
+                    <div class="border rounded-full p-2 border-white/30 text-center w-12 h-12 flex items-center justify-center">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-white text-xl">#1 Food App</p>
+                        <p class="text-s text-gray-900">Health & Lifestyle Category</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Stats) -->
+                <div class="text-left">
+                    <p class="text-3xl font-serif font-bold text-white">50k+</p>
+                    <p class="text-s text-gray-900 uppercase tracking-wider">Restaurants Scanned</p>
+                    <p class="text-s text-gray-900">In Global Database</p>
+                </div>
+
+                 <!-- Item 5 (Stats) -->
+                 <div class="text-left">
+                    <p class="text-3xl font-serif font-bold text-white">4.9/5</p>
+                    <p class="text-s text-gray-900 uppercase tracking-wider">User Rating</p>
+                    <p class="text-s text-gray-900">On App Store</p>
+                </div>
+
             </div>
-          </div>
-          <div class="feed-instructions">
-            <div><span>Swipe ↑ / ↓</span> Next dish</div>
-            <div><span>Swipe ←</span> Restaurant page</div>
-            <div><span>Swipe →</span> Back to list</div>
-          </div>
-          <div class="feed-buttons">
-            <button class="btn secondary" type="button" data-feed-nav="prev">
-              Prev
-            </button>
-            <button class="btn primary" type="button" data-feed-nav="next">
-              Next
-            </button>
-          </div>
-        </section>
-      </div>
+        </div>
     </div>
-
-    <footer class="site-footer">
-      <p>© <span id="year"></span> BiteWise. Meals that match your mood.</p>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Press</a>
-        <a href="#">Partner with us</a>
-      </div>
-    </footer>
-  </body>
+</body>
 </html>
