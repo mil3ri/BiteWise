@@ -11,9 +11,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         body { font-family: 'Poppins', sans-serif; }
         .phone-iframe {
-            width: 100%;
-            height: 100%;
+            width: 110%;
+            height: 110%;
             border: none;
+            transform: translate(-14px, -26px) scale(0.9);
+            transform-origin: center;
             background-color: #020617;
         }
     </style>
@@ -108,7 +110,7 @@
                     <!-- Screen Content -->
                     <div class="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-black">
                         <iframe
-                            src="scanner.html"
+                            src="build/index.html"
                             title="BiteWise App Preview"
                             class="phone-iframe absolute inset-0"
                             loading="lazy"

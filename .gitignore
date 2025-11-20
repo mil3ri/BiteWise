@@ -1,1 +1,4 @@
 mobile/
+BiteWiseMobile/
+!BiteWiseMobile/build/
+!BiteWiseMobile/build/**
