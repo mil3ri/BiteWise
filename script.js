@@ -69,6 +69,13 @@ const filterSelectAllButton = document.querySelector(
   "[data-filter-select-all]",
 );
 const openFilterButtons = document.querySelectorAll("[data-open-filters]");
+const betaModal = document.getElementById("betaModal");
+const betaForm = document.getElementById("betaForm");
+const betaStatus = document.getElementById("betaStatus");
+const betaSuccess = document.getElementById("betaSuccess");
+const betaError = document.getElementById("betaError");
+const betaOpenButtons = document.querySelectorAll("[data-open-beta]");
+const betaCloseButtons = document.querySelectorAll("[data-close-beta]");
 
 const preferenceGrid = document.getElementById("preferenceGrid");
 const matchList = document.getElementById("matchList");
@@ -103,6 +110,10 @@ let dragIntent = null;
 let allMeals = [];
 let currentFeedMeals = [];
 let selectedTagIds = new Set(cravings.map((craving) => craving.id));
+const BETA_ENDPOINT =
+  (typeof window !== "undefined" && window.BITEWISE_BETA_ENDPOINT) ||
+  "https://formspree.io/f/yourFormId";
+const BETA_STORAGE_KEY = "bitewiseBetaQueue";
 
 const buildPill = ({ id, label, description, emoji }) => {
   const button = document.createElement("button");
@@ -294,6 +305,7 @@ function enrichMealForCraving(meal, preferredIds) {
 }
 
 function renderPills() {
+  if (!preferenceGrid) return;
   const fragment = document.createDocumentFragment();
   cravings.forEach((craving) => {
     fragment.appendChild(buildPill(craving));
@@ -302,6 +314,7 @@ function renderPills() {
 }
 
 function renderMatches() {
+  if (!matchList) return;
   matchList.innerHTML = "";
   const matches = getMealsForCraving(activeCravingId);
 
@@ -826,12 +839,159 @@ function updateScannerCravingChip() {
   scannerCravingLabel.textContent = `${label} +${rest.length} more`;
 }
 
+function persistBetaSignup(record) {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const existingRaw = localStorage.getItem(BETA_STORAGE_KEY);
+    const existing = existingRaw ? JSON.parse(existingRaw) : [];
+    existing.push(record);
+    localStorage.setItem(BETA_STORAGE_KEY, JSON.stringify(existing));
+  } catch (error) {
+    console.warn("Unable to persist beta signup locally", error);
+  }
+}
+
+function resetBetaFeedback() {
+  if (betaStatus) betaStatus.textContent = "";
+  if (betaSuccess) {
+    betaSuccess.textContent = "";
+    betaSuccess.classList.add("hidden");
+  }
+  if (betaError) {
+    betaError.textContent = "";
+    betaError.classList.add("hidden");
+  }
+}
+
+function setBetaStatus(message, variant) {
+  if (!betaStatus) return;
+  betaStatus.textContent = message;
+  betaStatus.classList.toggle("text-pink-500", variant === "loading");
+  betaStatus.classList.toggle("text-gray-500", variant !== "loading");
+}
+
+function openBetaModal() {
+  if (!betaModal) return;
+  betaModal.classList.remove("hidden");
+  betaModal.classList.add("flex");
+  document.body.classList.add("overflow-hidden");
+  resetBetaFeedback();
+  betaForm?.reset();
+  document.getElementById("betaEmail")?.focus();
+}
+
+function closeBetaModal() {
+  if (!betaModal) return;
+  betaModal.classList.add("hidden");
+  betaModal.classList.remove("flex");
+  document.body.classList.remove("overflow-hidden");
+}
+
+async function submitBetaForm(event) {
+  event.preventDefault();
+  if (!betaForm) return;
+  resetBetaFeedback();
+  const submitBtn = betaForm.querySelector("button[type='submit']");
+  const formData = new FormData(betaForm);
+  const payload = {
+    email: (formData.get("email") ?? "").trim(),
+    firstName: (formData.get("firstName") ?? "").trim(),
+    lastName: (formData.get("lastName") ?? "").trim(),
+    phone: (formData.get("phone") ?? "").trim(),
+    submittedAt: new Date().toISOString(),
+    source: "bitewise-web",
+  };
+
+  if (!payload.email) {
+    if (betaError) {
+      betaError.textContent = "Email is required to reserve a beta invite.";
+      betaError.classList.remove("hidden");
+    }
+    return;
+  }
+
+  submitBtn?.setAttribute("disabled", "true");
+  setBetaStatus("Sending your request…", "loading");
+
+  try {
+    const response = await fetch(BETA_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result?.ok === false) {
+      throw new Error(result?.error || `Beta API error (${response.status})`);
+    }
+
+    const record = {
+      ...payload,
+      submissionId: result?.submission_id ?? result?.id ?? null,
+    };
+    persistBetaSignup(record);
+
+    if (betaSuccess) {
+      betaSuccess.textContent = "You're on the list! We received your info and will reach out soon.";
+      if (record.submissionId) {
+        const badge = document.createElement("span");
+        badge.className = "ml-2 inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-800";
+        badge.textContent = `Ticket #${record.submissionId}`;
+        betaSuccess.appendChild(badge);
+      }
+      betaSuccess.classList.remove("hidden");
+    }
+    setBetaStatus("We'll email you as soon as slots open.");
+    betaForm.reset();
+  } catch (error) {
+    console.error("Unable to submit beta request", error);
+    persistBetaSignup({ ...payload, storageFailure: true });
+    if (betaError) {
+      betaError.textContent =
+        "We saved your info locally but couldn't reach the signup service. Please check your connection and try again.";
+      betaError.classList.remove("hidden");
+    }
+    setBetaStatus("Tap submit again when you're back online.");
+  } finally {
+    submitBtn?.removeAttribute("disabled");
+  }
+}
+
+function wireBetaModal() {
+  if (!betaModal) return;
+  betaOpenButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      openBetaModal();
+    }),
+  );
+  betaCloseButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      closeBetaModal();
+    }),
+  );
+  betaModal.addEventListener("click", (event) => {
+    if (event.target === betaModal) {
+      closeBetaModal();
+    }
+  });
+  betaForm?.addEventListener("submit", submitBetaForm);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !betaModal.classList.contains("hidden")) {
+      closeBetaModal();
+    }
+  });
+}
+
 async function init() {
   renderPills();
   await loadMeals();
   setActiveCraving(activeCravingId);
   wireScrollButtons();
   wireCtaForm();
+  wireBetaModal();
   initYear();
   initScanner();
 }
