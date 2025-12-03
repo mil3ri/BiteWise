@@ -28,10 +28,10 @@
         <!-- Decorational Gradient Blur -->
         <div class="absolute top-0 right-0 w-1/2 h-full bg-gray-200 opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
         <!-- Navigation -->
-        <nav class="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+        <nav class="container mx-auto px-6 py-4 md:py-6 flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
                 <!-- Logo -->
-                <svg width="40" height="50" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-8 h-auto md:w-10 md:h-[50px]" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#22C55E" fill-rule="evenodd" d="
                         M 100,20 
                         C 160,20 180,50 180,95      
@@ -64,7 +64,7 @@
                         Z" 
                     />
                 </svg>
-                <span class="text-2xl font-bold tracking-tight">BiteWise</span>
+                <span class="text-xl md:text-2xl font-bold tracking-tight">BiteWise</span>
             </div>
             
             <div class="hidden md:flex gap-8 text-l font-semibold text-gray-900">
@@ -72,29 +72,29 @@
                 <a href="#how-it-works" data-scroll="#how-it-works" class="hover:text-pink-400 transition">HOW IT WORKS</a>
             </div>
 
-            <a href="scanner.html" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1 text-sm">
+            <a href="scanner.html" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 md:py-3 md:px-6 rounded-full shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1 text-xs md:text-sm">
                 TRY DEMO
             </a>
         </nav>
 
         <!-- Hero Section -->
-        <div class="container mx-auto px-6 pt-10 pb-20 flex flex-col lg:flex-row items-center relative z-10">
+        <div class="container mx-auto px-6 pt-6 pb-6 md:pt-10 md:pb-10 flex flex-col lg:flex-row items-center relative z-10">
             
             <!-- Left Column: Copy -->
             <div class="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0">
-                <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight mb-6">
                     Find <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-300">Healthy</span> Meals Near <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-300">You</span>
                 </h1>
                 
-                <p class="text-gray-900 text-lg mb-10 leading-relaxed">
+                <p class="text-gray-900 text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
                     BiteWise lists all the meals around you according to your dietary preferences, removing the need to search through multiple menus.
                 </p>
 
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <button data-open-beta class="bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-4 px-10 rounded-full shadow-xl shadow-pink-500/40 transition transform hover:-translate-y-1">
+                    <button data-open-beta class="bg-pink-500 hover:bg-pink-600 text-white text-base md:text-lg font-bold py-3 px-8 md:py-4 md:px-10 rounded-full shadow-xl shadow-pink-500/40 transition transform hover:-translate-y-1">
                         JOIN BETA
                     </button>
-                    <span class="text-pink-500 font-black uppercase tracking-[0.2em] text-xs sm:text-sm">
+                    <span class="text-pink-500 font-black uppercase tracking-[0.2em] text-[0.65rem] sm:text-sm">
                         Eat healthier. Save time. Try BiteWise now
                     </span>
                 </div>
@@ -103,11 +103,11 @@
             <!-- Right Column: Image Representation -->
             <div class="lg:w-1/2 relative">
                 <!-- Phone Container -->
-                <div class="relative mx-auto w-72 h-[500px] bg-gray-900 rounded-[3rem] border-8 border-gray-800 shadow-2xl overflow-hidden z-20">
+                <div class="relative mx-auto w-60 h-[420px] md:w-72 md:h-[500px] bg-gray-900 rounded-[2.5rem] md:rounded-[3rem] border-4 md:border-8 border-gray-800 shadow-2xl overflow-hidden z-20">
                     <div class="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-gray-700 rounded-full z-30"></div>
                     <div class="absolute top-4 right-10 w-5 h-5 rounded-full border border-gray-700"></div>
                     <!-- Screen Content -->
-                    <div class="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-black">
+                    <div class="relative h-full w-full overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-black">
                         <iframe
                             src="build/index.html"
                             title="BiteWise App Preview"
@@ -121,24 +121,24 @@
         </div>
 
         <!-- Testimonials Section -->
-        <section class="relative z-10 bg-white py-24">
+        <section class="relative z-10 bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <p class="text-sm font-semibold tracking-widest text-pink-500 uppercase">Community Love</p>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2">What our early users are saying</h2>
+                <div class="text-center mb-10 md:mb-16">
+                    <p class="text-xs md:text-sm font-semibold tracking-widest text-pink-500 uppercase">Community Love</p>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2">What our early users are saying</h2>
                 </div>
 
-                <div class="grid gap-8 md:grid-cols-3">
+                <div class="grid gap-6 md:gap-8 md:grid-cols-3">
                     <!-- Testimonial 1 -->
-                    <div class="bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
-                        <div class="flex text-yellow-400 mb-4">
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4 text-sm md:text-base">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-gray-700 mb-6 leading-relaxed">"Finally, an app that understands 'gluten-free' isn't just a preference for me, it's a necessity. Found three new safe spots in my neighborhood!"</p>
+                        <p class="text-gray-700 mb-6 leading-relaxed text-sm md:text-base">"Finally, an app that understands 'gluten-free' isn't just a preference for me, it's a necessity. Found three new safe spots in my neighborhood!"</p>
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 font-bold text-xl">S</div>
                             <div>
@@ -149,15 +149,15 @@
                     </div>
 
                     <!-- Testimonial 2 -->
-                    <div class="bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
-                        <div class="flex text-yellow-400 mb-4">
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4 text-sm md:text-base">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-gray-700 mb-6 leading-relaxed">"I'm trying to hit high protein goals and usually have to scour PDF menus online. BiteWise just shows me the macros instantly. Game changer."</p>
+                        <p class="text-gray-700 mb-6 leading-relaxed text-sm md:text-base">"I'm trying to hit high protein goals and usually have to scour PDF menus online. BiteWise just shows me the macros instantly. Game changer."</p>
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-500 font-bold text-xl">J</div>
                             <div>
@@ -168,15 +168,15 @@
                     </div>
 
                     <!-- Testimonial 3 -->
-                    <div class="bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
-                        <div class="flex text-yellow-400 mb-4">
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4 text-sm md:text-base">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star-half-stroke"></i>
                         </div>
-                        <p class="text-gray-700 mb-6 leading-relaxed">"Used it during my lunch break when I had zero time. Found a healthy bowl place 5 mins away I didn't even know existed."</p>
+                        <p class="text-gray-700 mb-6 leading-relaxed text-sm md:text-base">"Used it during my lunch break when I had zero time. Found a healthy bowl place 5 mins away I didn't even know existed."</p>
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 font-bold text-xl">E</div>
                             <div>
@@ -190,61 +190,61 @@
         </section>
 
         <!-- Feature Highlights Section -->
-        <section id="features" class="relative z-10 bg-white pb-24">
-            <div class="container mx-auto px-6 space-y-10">
+        <section id="features" class="relative z-10 bg-white pb-16 md:pb-24">
+            <div class="container mx-auto px-6 space-y-8 md:space-y-10">
                 <div class="max-w-3xl mx-auto">
-                    <p class="text-sm font-semibold tracking-widest text-black uppercase">Why BiteWise</p>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-black">Smarter healthy eating in minutes</h2>
+                    <p class="text-xs md:text-sm font-semibold tracking-widest text-black uppercase">Why BiteWise</p>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-black">Smarter healthy eating in minutes</h2>
                 </div>
 
-                <ul class="max-w-3xl mx-auto space-y-6">
-                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                <ul class="max-w-3xl mx-auto space-y-4 md:space-y-6">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-4 md:p-6 shadow-sm">
+                        <div class="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-black text-white text-lg md:text-xl shrink-0">
                             <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-black">Location-based suggestions</p>
-                            <p class="text-base text-gray-900">Instantly see the healthiest options near you.</p>
+                            <p class="text-base md:text-lg font-semibold text-black">Location-based suggestions</p>
+                            <p class="text-sm md:text-base text-gray-900">Instantly see the healthiest options near you.</p>
                         </div>
                     </li>
 
-                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-4 md:p-6 shadow-sm">
+                        <div class="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-black text-white text-lg md:text-xl shrink-0">
                             <i class="fa-solid fa-bowl-food"></i>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-black">Personalized to your diet</p>
-                            <p class="text-base text-gray-900">Vegan, gluten-free, high-protein, low-calorie — whatever fits your goals.</p>
+                            <p class="text-base md:text-lg font-semibold text-black">Personalized to your diet</p>
+                            <p class="text-sm md:text-base text-gray-900">Vegan, gluten-free, high-protein, low-calorie — whatever fits your goals.</p>
                         </div>
                     </li>
 
-                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-4 md:p-6 shadow-sm">
+                        <div class="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-black text-white text-lg md:text-xl shrink-0">
                             <i class="fa-solid fa-stopwatch"></i>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-black">Saves time</p>
-                            <p class="text-base text-gray-900">No more checking 10 different menus. BiteWise does the filtering for you.</p>
+                            <p class="text-base md:text-lg font-semibold text-black">Saves time</p>
+                            <p class="text-sm md:text-base text-gray-900">No more checking 10 different menus. BiteWise does the filtering for you.</p>
                         </div>
                     </li>
 
-                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-4 md:p-6 shadow-sm">
+                        <div class="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-black text-white text-lg md:text-xl shrink-0">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-black">Transparent nutrition info</p>
-                            <p class="text-base text-gray-900">See calories, macros, and ingredients at a glance.</p>
+                            <p class="text-base md:text-lg font-semibold text-black">Transparent nutrition info</p>
+                            <p class="text-sm md:text-base text-gray-900">See calories, macros, and ingredients at a glance.</p>
                         </div>
                     </li>
 
-                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-6 shadow-sm">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white text-xl">
+                    <li class="flex gap-4 rounded-2xl border border-black/10 bg-white/60 p-4 md:p-6 shadow-sm">
+                        <div class="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-black text-white text-lg md:text-xl shrink-0">
                             <i class="fa-solid fa-star"></i>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-black">Smart healthy scoring <span class="text-xs font-normal text-gray-500 align-middle">(optional)</span></p>
-                            <p class="text-base text-gray-900">Meals get a “health rating” so you can pick the best one easily.</p>
+                            <p class="text-base md:text-lg font-semibold text-black">Smart healthy scoring <span class="text-xs font-normal text-gray-500 align-middle">(optional)</span></p>
+                            <p class="text-sm md:text-base text-gray-900">Meals get a “health rating” so you can pick the best one easily.</p>
                         </div>
                     </li>
                 </ul>
@@ -252,7 +252,7 @@
         </section>
 
         <!-- How It Works Section -->
-        <section id="how-it-works" class="relative z-10 bg-green-500 pb-22 pt-32">
+        <section id="how-it-works" class="relative z-10 bg-green-500 pb-16 pt-24 md:pb-22 md:pt-32">
             <div class="absolute inset-x-0 top-0">
             <svg viewBox="0 0 1440 240" xmlns="http://www.w3.org/2000/svg" class="w-full h-32" preserveAspectRatio="none">
                 <defs>
@@ -264,53 +264,53 @@
                 <path d="M0,80 C180,40 360,140 540,120 C720,100 900,20 1080,60 C1260,100 1350,120 1440,100 L1440,0 L0,0 Z" fill="url(#squiggleGradient)"/>
             </svg>
             </div>
-            <div class="container mx-auto px-6 pb-24">
-            <div class="text-center mb-14">
-                <p class="text-sm font-semibold tracking-widest text-white uppercase">How it works?</p>
-                <h2 class="text-3xl lg:text-4xl font-bold text-white">Healthy meals in three quick steps</h2>
+            <div class="container mx-auto px-6 pb-16 md:pb-24">
+            <div class="text-center mb-10 md:mb-14">
+                <p class="text-xs md:text-sm font-semibold tracking-widest text-white uppercase">How it works?</p>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white">Healthy meals in three quick steps</h2>
             </div>
 
-            <div class="grid gap-8 md:grid-cols-3">
+            <div class="grid gap-6 md:gap-8 md:grid-cols-3">
                 <!-- Step 1 -->
-                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-6 md:p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
                 <div class="flex items-center gap-4">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <div class="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-black text-white text-xl md:text-2xl">
                     <i class="fa-solid fa-seedling"></i>
                     </div>
-                    <p class="text-sm font-semibold tracking-wide text-black">Tell us your diet</p>
+                    <p class="text-xs md:text-sm font-semibold tracking-wide text-black">Tell us your diet</p>
                 </div>
-                <p class="text-base font-medium text-black">
+                <p class="text-sm md:text-base font-medium text-black">
                     Choose vegan, vegetarian, gluten-free, keto, or your own preferences.
                 </p>
-                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">1</span>
+                <span class="absolute right-6 top-6 text-4xl md:text-5xl font-black text-pink-200">1</span>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-6 md:p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
                 <div class="flex items-center gap-4">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <div class="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-black text-white text-xl md:text-2xl">
                     <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <p class="text-sm font-semibold tracking-wide text-black">Let us detect your location</p>
+                    <p class="text-xs md:text-sm font-semibold tracking-wide text-black">Let us detect your location</p>
                 </div>
-                <p class="text-base font-medium text-black">
+                <p class="text-sm md:text-base font-medium text-black">
                     See all healthy options near you.
                 </p>
-                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">2</span>
+                <span class="absolute right-6 top-6 text-4xl md:text-5xl font-black text-pink-200">2</span>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
+                <div class="relative flex flex-col bg-white gap-4 rounded-3xl border border-black/10 p-6 md:p-8 shadow-[0_15px_40px_-25px_rgba(0,0,0,0.8)]">
                 <div class="flex items-center gap-4">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white text-2xl">
+                    <div class="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-black text-white text-xl md:text-2xl">
                     <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <p class="text-sm font-semibold tracking-wide text-black">Get instant suggestions</p>
+                    <p class="text-xs md:text-sm font-semibold tracking-wide text-black">Get instant suggestions</p>
                 </div>
-                <p class="text-base font-medium text-black">
+                <p class="text-sm md:text-base font-medium text-black">
                     Pick your meal confidently.
                 </p>
-                <span class="absolute right-6 top-6 text-5xl font-black text-pink-200">3</span>
+                <span class="absolute right-6 top-6 text-4xl md:text-5xl font-black text-pink-200">3</span>
                 </div>
             </div>
             </div>
@@ -319,49 +319,49 @@
         <!-- Social Proof / Footer Strip -->
         <div class="backdrop-blur-sm" style="background-color:#22c55e;box-shadow:0 -20px 40px rgba(0,0,0,0.2);">
 
-            <div class="container mx-auto px-6 py-8 flex flex-wrap justify-between items-center gap-8">
+            <div class="container mx-auto px-6 py-6 md:py-8 flex flex-wrap justify-between items-center gap-6 md:gap-8">
                 
                 <!-- Item 1 -->
-                <div class="flex items-center gap-4">
-                    <div class="text-4xl text-white"><i class="fa-solid fa-leaf"></i></div>
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="text-3xl md:text-4xl text-white"><i class="fa-solid fa-leaf"></i></div>
                     <div>
-                        <p class="font-bold text-white text-xl">Dietary AI</p>
-                        <p class="text-s text-gray-900">Advanced Allergen Filtering</p>
+                        <p class="font-bold text-white text-lg md:text-xl">Dietary AI</p>
+                        <p class="text-xs md:text-sm text-gray-900">Advanced Allergen Filtering</p>
                     </div>
                 </div>
 
                 <!-- Item 2 -->
-                <div class="flex items-center gap-4">
-                    <div class="text-4xl text-white"><i class="fa-brands fa-google"></i></div>
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="text-3xl md:text-4xl text-white"><i class="fa-brands fa-google"></i></div>
                     <div>
-                        <p class="font-bold text-white text-xl">Google Maps</p>
-                        <p class="text-s text-gray-900">Integrated Navigation</p>
+                        <p class="font-bold text-white text-lg md:text-xl">Google Maps</p>
+                        <p class="text-xs md:text-sm text-gray-900">Integrated Navigation</p>
                     </div>
                 </div>
 
                 <!-- Item 3 -->
-                <div class="flex items-center gap-4">
-                    <div class="border rounded-full p-2 border-white/30 text-center w-12 h-12 flex items-center justify-center">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="border rounded-full p-2 border-white/30 text-center w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
                         <i class="fa-solid fa-award"></i>
                     </div>
                     <div>
-                        <p class="font-bold text-white text-xl">#1 Food App</p>
-                        <p class="text-s text-gray-900">Health & Lifestyle Category</p>
+                        <p class="font-bold text-white text-lg md:text-xl">#1 Food App</p>
+                        <p class="text-xs md:text-sm text-gray-900">Health & Lifestyle Category</p>
                     </div>
                 </div>
 
                 <!-- Item 4 (Stats) -->
                 <div class="text-left">
-                    <p class="text-3xl font-serif font-bold text-white">50k+</p>
-                    <p class="text-s text-gray-900 uppercase tracking-wider">Restaurants Scanned</p>
-                    <p class="text-s text-gray-900">In Global Database</p>
+                    <p class="text-2xl md:text-3xl font-serif font-bold text-white">50k+</p>
+                    <p class="text-xs md:text-sm text-gray-900 uppercase tracking-wider">Restaurants Scanned</p>
+                    <p class="text-xs md:text-sm text-gray-900">In Global Database</p>
                 </div>
 
                  <!-- Item 5 (Stats) -->
                  <div class="text-left">
-                    <p class="text-3xl font-serif font-bold text-white">4.9/5</p>
-                    <p class="text-s text-gray-900 uppercase tracking-wider">User Rating</p>
-                    <p class="text-s text-gray-900">On App Store</p>
+                    <p class="text-2xl md:text-3xl font-serif font-bold text-white">4.9/5</p>
+                    <p class="text-xs md:text-sm text-gray-900 uppercase tracking-wider">User Rating</p>
+                    <p class="text-xs md:text-sm text-gray-900">On App Store</p>
                 </div>
 
             </div>
